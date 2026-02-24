@@ -145,6 +145,8 @@ def genAtomType(txyz, key, potent):
       f.write(lines[0].split("\n")[0] + " comments\n")
       for i in range(1,len(lines)):
         f.write(lines[i])
+
+  #Loading the atom types and atom number
   atomnumbers, types = np.loadtxt(txyz, usecols=(0, 5,), unpack=True, dtype="str", skiprows=1)
   type_class_dict = {}
   atom_class_dict = {}
@@ -421,6 +423,8 @@ def assignNonbondedAMOEBAplus():
   chgpen_params = {}
   vdw_params = {}
 
+  #The mapping from smart strings to atom types to charge penetration parameters
+  #Creates a dict where the smarts are the keys and then the values are the parameter strings
   lines = open(os.path.join(prmfiledir,"amoebaplusNonbonded.prm")).readlines()
   for line in lines:
     dd = line.split()
