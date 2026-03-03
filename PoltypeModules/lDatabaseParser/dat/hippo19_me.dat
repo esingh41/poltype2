@@ -1,0 +1,148 @@
+[$([CX4H3][CX4])]                             1    1    T1       # "Pentane CH3"
+[$([H][CX4H3])]                               2    2    T2       # "Pentane H3C"
+
+[$([CX4H2]([CX4])[CX4])]                      3    3    T3       # "Pentane CH2-CH3"
+[$([H][CX4H2])]                               4    4    T4       # "Pentane H2C-CH3"
+
+[$([CX4H2]([CX4])[CX4])]                      3    3    T3       # "Pentane Middle -CH2-"
+[$([H][CX4H2])]                               4    4    T4       # "Pentane Middle H2C<"
+
+[$([CX4H3][CX4])]                             1    1    T1       # "Neopentane CH3"
+[$([H][CX4H3])]                               2    2    T2       # "Neopentane H3C"
+
+[$([CX4H0]([CX4])([CX4])([CX4])[CX4])]        5    5    T5       # "Neopentane >C<"
+
+[$([CX4H2;r5])]                               3    3    T3       # "Cyclopentane -CH2-"
+[$([H][CX4H2;r5])]                            4    4    T4       # "Cyclopentane H2C<"
+
+[$([C]=[C])]                                 6    6    T6        # "Ethene >C="
+[$([H][CH1]=[C])]                             7    7    T7       # "Ethene HC="
+
+[$([c])]                                      8    8    T8       # "Benzene C"
+[$([H][c])]                                   9    9    T9       # "Benzene H"
+
+[$([OX2H2])]                                  10   10   T10      # "Water O"
+[$([H][OX2H2])]                               11   11   T11      # "Water H"
+
+[$([OX2H1][CX4])]                             12   12   T12      # "Methanol O"
+[$([H][OX2H1][CX4])]                          13   13   T13      # "Methanol HO"
+[$([CX4H3][OX2H1])]                           14   14   T14      # "Methanol CH3"
+[$([H][CX4H3][OX2H1])]                        15   15   T15      # "Methanol H3C"
+
+[$([OX2H1][c])]                               16   16   T16      # "Phenol OH"
+[$([H][OX2H1][c])]                            17   17   T17      # "Phenol HO"
+[c][OX2H1]                                    8    8    T8       # "Phenol C1-OH"
+[c]                                           8    8    T8       # "Phenol C2"
+[c]                                           8    8    T8       # "Phenol C3"
+[c]                                           8    8    T8       # "Phenol C4"
+[$([H][c])]                                   9    9    T9       # "Phenol H2"
+[$([H][c])]                                   9    9    T9       # "Phenol H3"
+[$([H][c])]                                   9    9    T9       # "Phenol H4"
+
+[$([NX3H2][CX4])]                             18   18   T18      # "Methyl Amine N"
+[$([H][NX3H2])]                               19   19   T19      # "Methyl Amine H2N"
+[$([CX4][NX3H2])]                             20   20   T20      # "Methyl Amine CH3"
+[$([H][CX4H3][NX3H2])]                        21   21   T21      # "Methyl Amine H3C"
+
+[$([N+X4H3])]                                 22   22   T22      # "Methyl Ammonium N+"
+[$([H][N+X4H3])]                              23   23   T23      # "Methyl Ammonium H3N+"
+[$([CX4][N+X4H3])]                            24   24   T24      # "Methyl Ammonium CH3"
+[$([H][CX4H3][N+X4H3])]                       25   25   T25      # "Methyl Ammonium H3C"
+
+[$([NX3H1;R])]                                26   26   T26      # "Pyrrolidine N"
+[$([H][NX3H1;R])]                             27   27   T27      # "Pyrrolidine HN"
+[$([CX4H2][NX3H1;R])]                         28   28   T28      # "Pyrrolidine CH2-N"
+[$([H][CX4H2][NX3H1;R])]                      29   29   T29      # "Pyrrolidine H2C-N"
+[$([CX4H2;R])]                                28   28   T28      # "Pyrrolidine C-CH2-C"
+[$([H][CX4H2;R])]                             29   29   T29      # "Pyrrolidine C-CH2-C"
+
+[$([SX2]([CX4])[CX4])]                        30   30   T30      # "Methyl Sulfide S"
+[$([H][SX2])]                                 31   31   T31      # "Methyl Sulfide HS"
+[$([CX4H3][SX2])]                             32   32   T32      # "Methyl Sulfide CH3"
+[$([H][CX4H3][SX2])]                          33   33   T33      # "Methyl Sulfide H3C"
+
+[$([SX2]([CX4])[CX4])]                        30   30   T30      # "Dimethyl Sulfide S"
+[$([CX4H3][SX2])]                             32   32   T32      # "Dimethyl Sulfide CH3"
+[$([H][CX4H3][SX2])]                          33   33   T33      # "Dimethyl Sulfide H3C"
+
+[$([OX2H1][CX3]=O)]                           34   34   T34      # "Acetic Acid OH"
+[$([H][OX2H1][CX3]=O)]                        35   35   T35      # "Acetic Acid HO"
+[$([CX3](=O))]                                36   36   T36      # "Acetic Acid C=O"
+[$([OX1]=[CX3])]                              37   37   T37      # "Acetic Acid O=C"
+[$([CX4H3][CX3](=O))]                         38   38   T38      # "Acetic Acid CH3"
+[$([H][CX4H3][CX3](=O))]                      39   39   T39      # "Acetic Acid H3C"
+
+[$([CX3](=O)[O-])]                            40   40   T40      # "Acetate CO2-"
+[$([O-][CX3]=O)]                              41   41   T41      # "Acetate O-"
+
+[$([O]=[#6][#7])]                             43   43   T43      # "Acetamide 0" 
+[$([H][NX3][C]=[O])]                          45   45   T45      # "Acetamide H2N" 
+[$([NH2][C]=[O])]                             44   44   T44      # "Acetamide N"	
+[$([NH1][C]=[O])]                             44   44   T44      # "Acetamide N"	
+[$([NH0][C]=[O])]                             44   44   T44      # "Acetamide N"
+[$([CX3](N)=[O])]                             46   46   T46      # "Acetamide CH3"  
+[$([CH1](N)=[O])]                             42   42   T42      # "NMeAcetamide C=O"  
+[$([CH3][NX3H0][C]=[O])]                      49   49   T49      # "NMeAcetamide H3C-N" 
+[$([CH3][NX3H1][C]=[O])]                      48   48   T48      # "NMeAcetamide CH3-N"   
+
+[F][CX4H3]                                    50   50   T50      # "Methyl Fluoride F"
+[Cl][CX4H3]                                   53   53   T53      # "Methyl Chloride Cl"
+[Br][CX4H3]                                   54   54   T54      # "Methyl Bromide Br"
+
+[$([CX4H3][F,Cl,Br])]                         51   51   T51      # "Methyl Halide CH3"
+[$([H][CX4H3][F,Cl,Br])]                      52   52   T52      # "Methyl Halide H3C"
+
+[$([F,Cl,Br][CX4H2])]                         50   50   T50      # "Methylene Halide X"
+[$([CX4H2]([F,Cl,Br])[F,Cl,Br])]              55   55   T55      # "Methylene Halide CH2"
+[$([H][CX4H2][F,Cl,Br])]                      56   56   T56      # "Methylene Halide H2C"
+
+[F,Cl,Br][c]                                  50   50   T50      # "Aryl Halide X"
+[c][F,Cl,Br]                                  8    8    T8       # "Aryl C1-X"
+[$([H][c])]                                   9    9    T9       # "Aryl H"
+
+[nH0;r6]                                      57   57   T57      # "Pyridine N"
+[c;r6]                                        58   58   T58      # "Pyridine C"
+[$([H][c;r6])]                                59   59   T59      # "Pyridine H"
+
+[nH1;r5]                                      60   60   T60      # "Imidazole NH"
+[nH0;r5]                                      62   62   T62      # "Imidazole N=C"
+[c;r5]                                        63   63   T63      # "Imidazole C"
+[$([H][c;r5])]                                64   64   T64      # "Imidazole H"
+
+[nH1]                                         73   73   T73      # "Indole N"
+[$([H][nH1])]                                 74   74   T74      # "Indole HN"
+[c]                                           75   75   T75      # "Indole C"
+[$([H][c])]                                   9    9    T9       # "Indole H"
+
+[$([SX3](=O)([CX4])[CX4])]                    84   84   T84      # "Dimethyl Sulfoxide S=O"
+[$([O]=[SX3])]                                85   85   T85      # "Dimethyl Sulfoxide O"
+[$([CX4H3][SX3])]                             86   86   T86      # "Dimethyl Sulfoxide CH3"
+[$([H][CX4H3][SX3])]                          87   87   T87      # "Dimethyl Sulfoxide H3C"
+
+[$([PX4](=O)(O)(O)O)]                         88   88   T88      # "Phosphoric Acid P"
+[$([O]=[PX4])]                                89   89   T89      # "Phosphoric Acid O=P"
+[$([OX2H1][PX4])]                             90   90   T90      # "Phosphoric Acid P-O-H"
+[$([H][OX2H1][PX4])]                          91   91   T91      # "Phosphoric Acid H-O-P"
+[$([O-][PX4])]                                92   92   T92      # "Phosphate O-"
+
+[$([NX3H2][CX3](=[NX3H2])[NX3H2])]            81   81   T81      # "Guanidinium N"
+[$([H][NX3H2])]                               82   82   T82      # "Guanidinium H2N"
+[$([CX3](=[NX3H2])[NX3H2])]                   83   83   T83      # "Guanidinium C"
+
+[nH1]                                         96   96   T96      # "Uracil N"
+[c]                                           93   93   T93      # "Uracil C"
+[$([H][c])]                                   99   99   T99      # "Uracil H"
+[$([O]=[c])]                                102  102  T102     # "Uracil O"
+
+[$([CX3](=O)[NX3][CX3]=[CX3][NX3])]           93   93   T93      # "Uracil C2"
+[$([CX3](=O)[NX3][CX3H1][CX3H1][NX3])]        95   95   T95      # "Uracil C4"
+[$([CX3H1][CX3](=O)[NX3])]                    98   98   T98      # "Uracil C5"
+[$([CX3H1][NX3][CX3](=O))]                    94   94   T94      # "Uracil C6"
+
+[$([NX3H1][CX3](=O)[NX3][CX3])]               97   97   T97      # "Uracil N1"
+[$([NX3H1][CX3](=O)[CX3][NX3])]               96   96   T96      # "Uracil N3"
+[$([O]=[CX3][NX3])]                           102  102  T102     # "Uracil O2"
+[$([O]=[CX3][NX3][CX3])]                      103  103  T103     # "Uracil O4"
+
+[$([H][CX3H1][CX3](=O)[NX3])]                 101  101  T101     # "Uracil H5"
+[$([H][CX3H1][NX3][CX3](=O))]                 104  104  T104     # "Uracil H6"
