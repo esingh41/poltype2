@@ -169,6 +169,8 @@ def genAtomType(txyz, key, potent):
     inpfile = txyz
     inpformat = 'txyz'
     print(f"{YELLOW}Using tinker XYZ file to determine SMARTS types {ENDC}")
+
+  #Generates mol from tinker xyz
   for mol in pybel.readfile(inpformat,inpfile):
     matchDict = {}
     matchList = []
@@ -184,8 +186,10 @@ def genAtomType(txyz, key, potent):
     # Determine which HIPPO file to use based on hippo_alt flag
     if hippo_alt == 'v1':
       hippo_file = "hippo19Type_alt.dat"
+    # elif hippo_alt == 'v2':
+      # hippo_file = "hippo19Type_alt_v2.dat"
     elif hippo_alt == 'v2':
-      hippo_file = "hippo19Type_alt_v2.dat"
+      hippo_file = "hippo19_me.dat"
     else:
       hippo_file = "hippo19Type.dat"
     
@@ -207,6 +211,8 @@ def genAtomType(txyz, key, potent):
           className = line.split("# ")[0].split()[-1] 
           comment = line.split("# ")[-1][0:-1]
           smarts = pybel.Smarts(myStr)
+
+          #Finding the smarts match
           match = smarts.findall(mol)
           if match:
             for i in range(len(match)):
@@ -227,6 +233,8 @@ def genAtomType(txyz, key, potent):
 def assignPolar():
   genAtomType(xyz, key, 'POLAR')
   types, polars = [], []
+
+  #polarize.prm contains all the smarts
   lines = open(os.path.join(prmfiledir,"polarize.prm")).readlines()
   for line in lines:
     dd = line.split()
@@ -234,6 +242,7 @@ def assignPolar():
     polars.append(dd[2])
   smartspolarDict = dict(zip(types, polars))
   
+  #Grabbing tinker types and smart types from polar file
   ttypes, stypes = np.loadtxt(f"{fname}.type.polar", usecols=(1,3), unpack=True, dtype="str")
   tinkerpolarDict = {}
   for t,s in zip(ttypes, stypes): 
@@ -300,12 +309,15 @@ def assignPolar():
 
   return True
 
-def assignPolarHIPPO19():
-  """Assign HIPPO19 polarizability parameters"""
+def assignPolarHIPPO19_old():
+
+  #Assign atom types to hippo19 atoms
   genAtomType(xyz, key, 'POLAR_HIPPO')
   
   # Read polarize parameters from HIPPO19 database
   lines = open(os.path.join(prmfiledir,"hippo19Polar.prm")).readlines()
+
+  #dict form of the information in hippo19Polar.prm
   class2polar = {}
   
   for line in lines:
@@ -320,6 +332,8 @@ def assignPolarHIPPO19():
   
   # Map Tinker types to HIPPO classes to polarize params
   # Column 1=atomtype, 2=atomclass, 3=shortname, 4=HIPPO_class_number
+
+  #.type.polar_hippo contains mappings of your atom types to tinker types
   ttypes, classs, stypes = np.loadtxt(f"{fname}.type.polar_hippo", usecols=(1,2,4), unpack=True, dtype="str")
   tinkerpolarDict = {}
   
@@ -342,6 +356,73 @@ def assignPolarHIPPO19():
       print(GREEN + f"HIPPO19 polarizability parameter found for {t}" + ENDC)
   
   return True
+
+def assignPolarHIPPO19():
+
+    # Assign HIPPO atom types
+    genAtomType(xyz, key, 'POLAR_HIPPO')
+
+    # Read HIPPO polarizability database
+    lines = open(os.path.join(prmfiledir, "hippo19Polar.prm")).readlines()
+
+    # Map HIPPO class -> alpha only (ignore template connectivity!)
+    class2alpha = {}
+
+    for line in lines:
+        if line.strip() and not line.startswith('#'):
+            dd = line.split()
+            if len(dd) >= 3 and dd[0].lower() == 'polarize':
+                class_num = dd[1]
+                alpha = dd[2]
+                class2alpha[class_num] = alpha
+
+    # Load mapping: Tinker type -> HIPPO class
+    # Columns: 1=atomtype, 2=atomclass, 3=shortname, 4=HIPPO_class_number
+    ttypes, classs, hippo_classes = np.loadtxt(
+        f"{fname}.type.polar_hippo",
+        usecols=(1, 2, 4),
+        unpack=True,
+        dtype="str"
+    )
+
+    # Build Tinker type -> alpha dictionary
+    tinkerpolarDict = {}
+    for t, hc in zip(ttypes, hippo_classes):
+        if t not in tinkerpolarDict and hc in class2alpha:
+            tinkerpolarDict[t] = class2alpha[hc]
+
+    # Now modify existing key file polarize lines
+    keylines = open(key).readlines()
+
+    with open(key + "_polar_hippo", "w") as f:
+        for line in keylines:
+
+            if "polarize " in line:
+                dd = line.split()
+
+                ttype = dd[1]
+
+                if ttype in tinkerpolarDict:
+                    oldline = "#" + line
+                    f.write(oldline)
+
+                    # Replace ONLY alpha (3rd field)
+                    dd[2] = tinkerpolarDict[ttype]
+                    dd = dd[:3] + dd[5:]
+
+                    newline = "    ".join(dd) + "\n"
+                    f.write(newline)
+
+                    print(GREEN + f"HIPPO19 polarizability parameter found for {ttype}" + ENDC)
+
+                else:
+                    f.write(line)
+
+            # else:
+                # f.write(line)
+
+    return True
+
 
 def assignVdwAMOEBA():
   genAtomType(xyz, key, 'VDW')
