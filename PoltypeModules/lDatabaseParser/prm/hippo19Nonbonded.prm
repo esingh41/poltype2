@@ -1,0 +1,432 @@
+# ========================================================================
+# HIPPO-2019 Nonbonded Parameters
+# Extracted from /home/esingh41/gits/Tinker/params/hippo19.prm
+# ========================================================================
+
+# Charge Penetration Parameters (104 classes, 2 parameters each)
+# Format: CHGPEN  CLASS  ALPHA  SIZE
+chgpen             1          4.0000     4.5439
+chgpen             2          1.0000     4.3225
+chgpen             3          4.0000     4.5439
+chgpen             4          1.0000     4.3225
+chgpen             5          4.0000     4.5439
+chgpen             6          4.0000     3.5491
+chgpen             7          1.0000     4.9530
+chgpen             8          4.0000     3.8056
+chgpen             9          1.0000     4.9530
+chgpen            10          6.0000     4.7004
+chgpen            11          1.0000     4.7441
+chgpen            12          6.0000     4.7004
+chgpen            13          1.0000     4.7441
+chgpen            14          4.0000     4.2998
+chgpen            15          1.0000     4.2097
+chgpen            16          6.0000     4.7004
+chgpen            17          1.0000     4.7441
+chgpen            18          5.0000     3.9882
+chgpen            19          1.0000     5.5155
+chgpen            20          4.0000     4.2998
+chgpen            21          1.0000     4.2097
+chgpen            22          5.0000     3.9882
+chgpen            23          1.0000     5.5155
+chgpen            24          4.0000     4.2998
+chgpen            25          1.0000     4.2097
+chgpen            26          5.0000     3.9882
+chgpen            27          1.0000     5.5155
+chgpen            28          4.0000     4.2998
+chgpen            29          1.0000     4.2097
+chgpen            30          6.0000     3.3620
+chgpen            31          1.0000     4.3952
+chgpen            32          4.0000     4.2998
+chgpen            33          1.0000     4.2097
+chgpen            34          6.0000     4.7004
+chgpen            35          1.0000     4.7441
+chgpen            36          4.0000     5.9682
+chgpen            37          6.0000     4.2263
+chgpen            38          4.0000     4.2998
+chgpen            39          1.0000     4.2097
+chgpen            40          4.0000     5.9682
+chgpen            41          6.0000     4.0355
+chgpen            42          4.0000     5.9682
+chgpen            43          6.0000     4.2263
+chgpen            44          5.0000     3.9413
+chgpen            45          1.0000     5.5155
+chgpen            46          4.0000     4.2998
+chgpen            47          1.0000     4.2097
+chgpen            48          4.0000     4.2998
+chgpen            49          1.0000     4.2097
+chgpen            50          7.0000     5.5080
+chgpen            51          4.0000     4.2998
+chgpen            52          1.0000     4.2097
+chgpen            53          7.0000     3.6316
+chgpen            54          7.0000     3.2008
+chgpen            55          4.0000     4.2998
+chgpen            56          1.0000     4.2097
+chgpen            57          5.0000     3.9434
+chgpen            58          4.0000     3.8066
+chgpen            59          1.0000     4.9530
+chgpen            60          5.0000     3.9434
+chgpen            61          1.0000     5.5155
+chgpen            62          5.0000     3.9434
+chgpen            63          4.0000     3.8066
+chgpen            64          1.0000     4.9530
+chgpen            65          4.0000     3.8066
+chgpen            66          4.0000     3.8066
+chgpen            67          5.0000     3.9434
+chgpen            68          1.0000     5.5155
+chgpen            69          4.0000     3.8066
+chgpen            70          1.0000     4.9530
+chgpen            71          4.0000     3.8066
+chgpen            72          1.0000     4.9530
+chgpen            73          5.0000     3.9434
+chgpen            74          1.0000     5.5155
+chgpen            75          4.0000     3.8066
+chgpen            76          4.0000     3.8056
+chgpen            77          4.0000     3.8056
+chgpen            78          4.0000     3.8056
+chgpen            79          4.0000     3.8056
+chgpen            80          4.0000     3.8066
+chgpen            81          5.0000     3.9413
+chgpen            82          1.0000     5.5155
+chgpen            83          4.0000     5.9682
+chgpen            84          6.0000     2.7272
+chgpen            85          6.0000     4.2263
+chgpen            86          4.0000     4.2998
+chgpen            87          1.0000     4.2097
+chgpen            88          5.0000     2.8130
+chgpen            89          6.0000     4.3312
+chgpen            90          6.0000     4.7004
+chgpen            91          1.0000     4.7441
+chgpen            92          6.0000     4.4574
+chgpen            93          4.0000     5.9682
+chgpen            94          4.0000     3.8066
+chgpen            95          4.0000     5.9682
+chgpen            96          5.0000     3.9434
+chgpen            97          5.0000     3.9434
+chgpen            98          4.0000     3.8056
+chgpen            99          1.0000     5.5155
+chgpen           100          1.0000     5.5155
+chgpen           101          1.0000     4.9530
+chgpen           102          6.0000     4.2263
+chgpen           103          6.0000     4.2263
+chgpen           104          1.0000     4.9530
+
+# Charge Transfer Parameters (104 classes, 2 parameters each)
+# Format: CHGTRN  CLASS  ALPHA  DAMP
+chgtrn             1             0.0     3.9592
+chgtrn             2          0.7008     3.6940
+chgtrn             3             0.0     3.9592
+chgtrn             4          0.7008     3.6940
+chgtrn             5             0.0     3.9592
+chgtrn             6          5.3583     3.1452
+chgtrn             7          0.3153     3.5855
+chgtrn             8          2.3818     2.9726
+chgtrn             9          0.3153     3.5855
+chgtrn            10          2.9145     3.1569
+chgtrn            11          0.4475     3.6463
+chgtrn            12          2.9145     3.1569
+chgtrn            13          0.4475     3.6463
+chgtrn            14             0.0        0.0
+chgtrn            15          0.8411     3.5844
+chgtrn            16          2.9145     3.1569
+chgtrn            17          0.4475     3.6463
+chgtrn            18          6.2657        0.0
+chgtrn            19          0.3656     3.4471
+chgtrn            20             0.0        0.0
+chgtrn            21          0.8411     3.5844
+chgtrn            22          6.2657        0.0
+chgtrn            23          0.3656     3.4471
+chgtrn            24             0.0        0.0
+chgtrn            25          0.8411     3.5844
+chgtrn            26          6.2657        0.0
+chgtrn            27          0.3656     3.4471
+chgtrn            28             0.0        0.0
+chgtrn            29          0.8411     3.5844
+chgtrn            30         14.5846     2.6794
+chgtrn            31          2.2731        0.0
+chgtrn            32             0.0        0.0
+chgtrn            33          0.8411     3.5844
+chgtrn            34          2.9145     3.1569
+chgtrn            35          0.4475     3.6463
+chgtrn            36             0.0        0.0
+chgtrn            37          3.6080     2.9976
+chgtrn            38             0.0        0.0
+chgtrn            39          0.8411     3.5844
+chgtrn            40             0.0        0.0
+chgtrn            41          2.3902     4.1085
+chgtrn            42             0.0        0.0
+chgtrn            43          3.6080     2.9976
+chgtrn            44          0.0837     2.8376
+chgtrn            45          0.3656     3.4471
+chgtrn            46             0.0        0.0
+chgtrn            47          0.8411     3.5844
+chgtrn            48             0.0        0.0
+chgtrn            49          0.8411     3.5844
+chgtrn            50          2.0463     3.8447
+chgtrn            51             0.0        0.0
+chgtrn            52          0.8411     3.5844
+chgtrn            53          9.8701     2.9257
+chgtrn            54         22.3674     3.8408
+chgtrn            55             0.0        0.0
+chgtrn            56          0.8411     3.5844
+chgtrn            57          6.1527        0.0
+chgtrn            58          1.1712     2.9184
+chgtrn            59          0.3153     3.5855
+chgtrn            60          6.1527        0.0
+chgtrn            61          0.3656     3.4471
+chgtrn            62          6.1527        0.0
+chgtrn            63          1.1712     2.9184
+chgtrn            64          0.3153     3.5855
+chgtrn            65          1.1712     2.9184
+chgtrn            66          1.1712     2.9184
+chgtrn            67          6.1527        0.0
+chgtrn            68          0.3656     3.4471
+chgtrn            69          1.1712     2.9184
+chgtrn            70          0.3153     3.5855
+chgtrn            71          1.1712     2.9184
+chgtrn            72          0.3153     3.5855
+chgtrn            73          6.1527        0.0
+chgtrn            74          0.3656     3.4471
+chgtrn            75          1.1712     2.9184
+chgtrn            76          2.3818     2.9726
+chgtrn            77          2.3818     2.9726
+chgtrn            78          2.3818     2.9726
+chgtrn            79          2.3818     2.9726
+chgtrn            80          1.1712     2.9184
+chgtrn            81          0.0837     2.8376
+chgtrn            82          0.3656     3.4471
+chgtrn            83             0.0        0.0
+chgtrn            84          0.1048     2.5229
+chgtrn            85          3.6080     2.9976
+chgtrn            86             0.0        0.0
+chgtrn            87          0.8411     3.5844
+chgtrn            88             0.0        0.0
+chgtrn            89             0.0        0.0
+chgtrn            90          2.9145     3.1569
+chgtrn            91          0.4475     3.6463
+chgtrn            92             0.0        0.0
+chgtrn            93             0.0        0.0
+chgtrn            94          1.1712     2.9184
+chgtrn            95             0.0        0.0
+chgtrn            96          6.1527        0.0
+chgtrn            97          6.1527        0.0
+chgtrn            98          2.3818     2.9726
+chgtrn            99          0.3656     3.4471
+chgtrn           100          0.3656     3.4471
+chgtrn           101          0.3153     3.5855
+chgtrn           102          3.6080     2.9976
+chgtrn           103          3.6080     2.9976
+chgtrn           104          0.3153     3.5855
+
+# Repulsion Parameters (104 classes, 3 parameters each)
+# Format: REPULSION  CLASS  SIZE  DAMP  REDUCE
+repulsion          1         20.9600     4.6400     3.4100
+repulsion          2         15.1456     4.2256     0.9410
+repulsion          3         20.9600     4.6400     3.4100
+repulsion          4         15.1456     4.2256     0.9410
+repulsion          5         20.9600     4.6400     3.4100
+repulsion          6         11.2600     3.5191     3.8750
+repulsion          7         10.6160     4.4833     0.9620
+repulsion          8         10.8664     3.7316     4.0000
+repulsion          9         10.6160     4.4833     0.9950
+repulsion         10         36.1856     4.6851     2.1822
+repulsion         11         10.4536     4.2292     0.8086
+repulsion         12         36.1856     4.6851     2.1822
+repulsion         13         10.4536     4.2292     0.7980
+repulsion         14         20.9600     4.6400     3.4100
+repulsion         15         16.5352     4.5106     0.9760
+repulsion         16         36.1856     4.6851     2.1822
+repulsion         17         10.4536     4.2292     0.7730
+repulsion         18         28.9144     4.1564     2.0000
+repulsion         19          9.7960     4.2680     0.9180
+repulsion         20         20.9600     4.6400     3.4100
+repulsion         21         16.5352     4.5106     0.9740
+repulsion         22         28.9144     4.1564     2.0000
+repulsion         23          9.7960     4.2680     0.8060
+repulsion         24         20.9600     4.6400     3.4100
+repulsion         25         16.5352     4.5106     0.8930
+repulsion         26         28.9144     4.1564     2.0000
+repulsion         27          9.7960     4.2680     0.8910
+repulsion         28         20.9600     4.6400     3.4100
+repulsion         29         16.5352     4.5106     0.9220
+repulsion         30         40.7288     3.6471     2.0029
+repulsion         31         10.4536     3.9909     0.8890
+repulsion         32         20.9600     4.6400     3.4100
+repulsion         33         16.5352     4.5106     0.9440
+repulsion         34         36.1856     4.6851     2.1822
+repulsion         35         10.4536     4.2292     0.7630
+repulsion         36         10.4800     3.5000     2.0200
+repulsion         37         11.0384     4.0802     6.0000
+repulsion         38         20.9600     4.6400     3.4100
+repulsion         39         16.5352     4.5106     0.9500
+repulsion         40         10.4800     3.5000     2.0200
+repulsion         41          9.4520     3.7446     5.7946
+repulsion         42         10.4800     3.5000     2.0200
+repulsion         43         11.0384     4.0802     6.0000
+repulsion         44         38.4720     4.2399     2.0000
+repulsion         45          9.7960     4.2680     0.8900
+repulsion         46         20.9600     4.6400     3.4100
+repulsion         47         16.5352     4.5106     0.9260
+repulsion         48         20.9600     4.6400     3.4100
+repulsion         49         16.5352     4.5106     0.9470
+repulsion         50         12.7704     4.7750     4.6586
+repulsion         51         20.9600     4.6400     3.4100
+repulsion         52         16.5352     4.5106     0.9350
+repulsion         53         16.4496     3.7830     5.8683
+repulsion         54         17.2576     3.5425     6.5813
+repulsion         55         20.9600     4.6400     3.4100
+repulsion         56         16.5352     4.5106     0.9280
+repulsion         57         31.8864     4.3189     2.2444
+repulsion         58         12.1392     3.6575     3.3128
+repulsion         59         10.6160     4.4833     0.9940
+repulsion         60         31.8864     4.3189     2.2444
+repulsion         61          9.7960     4.2680     0.8920
+repulsion         62         31.8864     4.3189     2.2444
+repulsion         63         12.1392     3.6575     3.3128
+repulsion         64         10.6160     4.4833     0.9630
+repulsion         65         12.1392     3.6575     3.3128
+repulsion         66         12.1392     3.6575     3.3128
+repulsion         67         31.8864     4.3189     2.2444
+repulsion         68          9.7960     4.2680     0.8460
+repulsion         69         12.1392     3.6575     3.3128
+repulsion         70         10.6160     4.4833     0.8950
+repulsion         71         12.1392     3.6575     3.3128
+repulsion         72         10.6160     4.4833     0.9060
+repulsion         73         31.8864     4.3189     2.2444
+repulsion         74          9.7960     4.2680     0.9130
+repulsion         75         12.1392     3.6575     3.3128
+repulsion         76         10.8664     3.7316     4.0000
+repulsion         77         10.8664     3.7316     4.0000
+repulsion         78         10.8664     3.7316     4.0000
+repulsion         79         10.8664     3.7316     4.0000
+repulsion         80         12.1392     3.6575     3.3128
+repulsion         81         38.4720     4.2399     2.0000
+repulsion         82          9.7960     4.2680     0.8500
+repulsion         83         10.4800     3.5000     2.0200
+repulsion         84         13.3888     3.3341     6.0000
+repulsion         85         11.0384     4.0802     6.0000
+repulsion         86         20.9600     4.6400     3.4100
+repulsion         87         16.5352     4.5106     0.9240
+repulsion         88         14.4592     4.3760     3.6492
+repulsion         89         13.1768     4.0922     5.5598
+repulsion         90         36.1856     4.6851     2.1822
+repulsion         91         10.4536     4.2292     0.7810
+repulsion         92         10.0024     3.7017     5.7522
+repulsion         93         10.4800     3.5000     2.0200
+repulsion         94         12.1392     3.6575     3.3128
+repulsion         95         10.4800     3.5000     2.0200
+repulsion         96         31.8864     4.3189     2.2444
+repulsion         97         31.8864     4.3189     2.2444
+repulsion         98         10.8664     3.7316     4.0000
+repulsion         99          9.7960     4.2680     0.8500
+repulsion        100          9.7960     4.2680     0.8500
+repulsion        101         10.6160     4.4833     0.9560
+repulsion        102         11.0384     4.0802     6.0000
+repulsion        103         11.0384     4.0802     6.0000
+repulsion        104         10.6160     4.4833     0.9560
+
+# Dispersion Parameters (104 classes, 2 parameters each)
+# Format: DISPERSION  CLASS  C6  DAMP
+dispersion         1         18.1472     4.5439
+dispersion         2          7.0153     4.3225
+dispersion         3         18.1472     4.5439
+dispersion         4          7.0153     4.3225
+dispersion         5         18.1472     4.5439
+dispersion         6         27.5956     3.5491
+dispersion         7          4.7752     4.9530
+dispersion         8         25.1602     3.8056
+dispersion         9          4.7752     4.9530
+dispersion        10         22.5286     4.7004
+dispersion        11          3.3513     4.7441
+dispersion        12         22.5286     4.7004
+dispersion        13          3.3513     4.7441
+dispersion        14         16.7895     4.2998
+dispersion        15          6.4475     4.2097
+dispersion        16         22.5286     4.7004
+dispersion        17          3.3513     4.7441
+dispersion        18         33.4759     3.9882
+dispersion        19          2.2238     5.5155
+dispersion        20         16.7895     4.2998
+dispersion        21          6.4475     4.2097
+dispersion        22         33.4759     3.9882
+dispersion        23          2.2238     5.5155
+dispersion        24         16.7895     4.2998
+dispersion        25          6.4475     4.2097
+dispersion        26         33.4759     3.9882
+dispersion        27          2.2238     5.5155
+dispersion        28         16.7895     4.2998
+dispersion        29          6.4475     4.2097
+dispersion        30         60.5601     3.3620
+dispersion        31          5.1227     4.3952
+dispersion        32         16.7895     4.2998
+dispersion        33          6.4475     4.2097
+dispersion        34         22.5286     4.7004
+dispersion        35          3.3513     4.7441
+dispersion        36          4.1502     5.9682
+dispersion        37         30.0411     4.2263
+dispersion        38         16.7895     4.2998
+dispersion        39          6.4475     4.2097
+dispersion        40          4.1502     5.9682
+dispersion        41         33.4521     4.0355
+dispersion        42          4.1502     5.9682
+dispersion        43         30.0411     4.2263
+dispersion        44         34.2019     3.9413
+dispersion        45          2.2238     5.5155
+dispersion        46         16.7895     4.2998
+dispersion        47          6.4475     4.2097
+dispersion        48         16.7895     4.2998
+dispersion        49          6.4475     4.2097
+dispersion        50         13.4133     5.5080
+dispersion        51         16.7895     4.2998
+dispersion        52          6.4475     4.2097
+dispersion        53         45.0491     3.6316
+dispersion        54         64.3023     3.2008
+dispersion        55         16.7895     4.2998
+dispersion        56          6.4475     4.2097
+dispersion        57         33.5310     3.9434
+dispersion        58         18.8259     3.8066
+dispersion        59          4.7752     4.9530
+dispersion        60         33.5310     3.9434
+dispersion        61          2.2238     5.5155
+dispersion        62         33.5310     3.9434
+dispersion        63         18.8259     3.8066
+dispersion        64          4.7752     4.9530
+dispersion        65         18.8259     3.8066
+dispersion        66         18.8259     3.8066
+dispersion        67         33.5310     3.9434
+dispersion        68          2.2238     5.5155
+dispersion        69         18.8259     3.8066
+dispersion        70          4.7752     4.9530
+dispersion        71         18.8259     3.8066
+dispersion        72          4.7752     4.9530
+dispersion        73         33.5310     3.9434
+dispersion        74          2.2238     5.5155
+dispersion        75         18.8259     3.8066
+dispersion        76         25.1602     3.8056
+dispersion        77         25.1602     3.8056
+dispersion        78         25.1602     3.8056
+dispersion        79         25.1602     3.8056
+dispersion        80         18.8259     3.8066
+dispersion        81         34.2019     3.9413
+dispersion        82          2.2238     5.5155
+dispersion        83          4.1502     5.9682
+dispersion        84         34.6420     2.7272
+dispersion        85         30.0411     4.2263
+dispersion        86         16.7895     4.2998
+dispersion        87          6.4475     4.2097
+dispersion        88          3.8493     2.8130
+dispersion        89         32.5028     4.3312
+dispersion        90         22.5286     4.7004
+dispersion        91          3.3513     4.7441
+dispersion        92         31.3032     4.4574
+dispersion        93          4.1502     5.9682
+dispersion        94         18.8259     3.8066
+dispersion        95          4.1502     5.9682
+dispersion        96         33.5310     3.9434
+dispersion        97         33.5310     3.9434
+dispersion        98         25.1602     3.8056
+dispersion        99          2.2238     5.5155
+dispersion       100          2.2238     5.5155
+dispersion       101          4.7752     4.9530
+dispersion       102         30.0411     4.2263
+dispersion       103         30.0411     4.2263
+dispersion       104          4.7752     4.9530

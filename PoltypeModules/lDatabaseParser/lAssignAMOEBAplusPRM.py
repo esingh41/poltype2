@@ -138,6 +138,7 @@ def write_tmp_key(txyz):
   return
 
 def genAtomType(txyz, key, potent):
+  global sdf
   fname, _ = os.path.splitext(txyz)
   lines = open(txyz).readlines()
   if len(lines[0].split()) == 1:
@@ -179,11 +180,22 @@ def genAtomType(txyz, key, potent):
     matchDict = dict.fromkeys(matchList, 0)
     commentsDict = dict.fromkeys(matchList, 0)
     classesDict = dict.fromkeys(matchList, 0)
+    
+    # Determine which HIPPO file to use based on hippo_alt flag
+    if hippo_alt == 'v1':
+      hippo_file = "hippo19Type_alt.dat"
+    elif hippo_alt == 'v2':
+      hippo_file = "hippo19Type_alt_v2.dat"
+    else:
+      hippo_file = "hippo19Type.dat"
+    
     potent_typefile_dict = {    "CF": ["amoebaplusCFluxType.dat", "amoebaplusCFluxType_general.dat"], \
                                "VDW": ["amoebaVdwType.dat"],  \
                              "POLAR": ["amoebaplusPolarType.dat"],  \
                             "BONDED": ["amoebaplusBondedType.dat"], \
-                         "NONBONDED": ["amoebaplusNonbondedType.dat"]}
+                         "NONBONDED": ["amoebaplusNonbondedType.dat"], \
+                  "NONBONDED_HIPPO": [hippo_file], \
+                      "POLAR_HIPPO": [hippo_file]}
     type_files = potent_typefile_dict[potent]
     for type_file in type_files:
       lines = open(os.path.join(datfiledir, type_file)).readlines()
@@ -286,6 +298,49 @@ def assignPolar():
         f.write(f"# {c}\n")
         f.write(f"{p}\n")
 
+  return True
+
+def assignPolarHIPPO19():
+  """Assign HIPPO19 polarizability parameters"""
+  genAtomType(xyz, key, 'POLAR_HIPPO')
+  
+  # Read polarize parameters from HIPPO19 database
+  lines = open(os.path.join(prmfiledir,"hippo19Polar.prm")).readlines()
+  class2polar = {}
+  
+  for line in lines:
+    if line.strip() and not line.startswith('#'):
+      dd = line.split()
+      if len(dd) >= 3 and dd[0].lower() == 'polarize':
+        class_num = dd[1]
+        alpha = dd[2]
+        # Connectivity info in remaining fields (if any)
+        connectivity = '  '.join(dd[3:]) if len(dd) > 3 else ''
+        class2polar[class_num] = (alpha, connectivity)
+  
+  # Map Tinker types to HIPPO classes to polarize params
+  # Column 1=atomtype, 2=atomclass, 3=shortname, 4=HIPPO_class_number
+  ttypes, classs, stypes = np.loadtxt(f"{fname}.type.polar_hippo", usecols=(1,2,4), unpack=True, dtype="str")
+  tinkerpolarDict = {}
+  
+  for t, c, s in zip(ttypes, classs, stypes): 
+    if t not in tinkerpolarDict:
+      # stypes contains the HIPPO class number matched by SMARTS
+      if s in class2polar:
+        tinkerpolarDict[t] = class2polar[s]
+  
+  # Write output
+  lines = open(key).readlines()
+  with open(key + "_polar_hippo", "w") as f:
+    for t in tinkerpolarDict:
+      alpha, conn = tinkerpolarDict[t]
+      if conn:
+        line = f"polarize {t}  {alpha}  {conn}\n"
+      else:
+        line = f"polarize {t}  {alpha}\n"
+      f.write(line)
+      print(GREEN + f"HIPPO19 polarizability parameter found for {t}" + ENDC)
+  
   return True
 
 def assignVdwAMOEBA():
@@ -478,6 +533,115 @@ def assignNonbondedAMOEBAplus():
       line = "vdw  %5s %s\n"%(t, tinkerVDWDict[t])
       f.write(line)
     print(GREEN+"van der Waals parameters assigned from database"+ENDC)
+  return True
+
+def assignNonbondedHIPPO19():
+  """Assign HIPPO19 nonbonded parameters (chgpen, chgtrn, repulsion, dispersion)"""
+  genAtomType(xyz, key, 'NONBONDED_HIPPO')
+
+  chgpen_params = {}
+  chgtrn_params = {}
+  repulsion_params = {}
+  dispersion_params = {}
+
+  # Read HIPPO19 nonbonded parameters database
+  lines = open(os.path.join(prmfiledir,"hippo19Nonbonded.prm")).readlines()
+  for line in lines:
+    dd = line.split()
+    if (len(dd) > 0) and ("CHGPEN" == dd[0].upper()):
+      class_num = dd[1]
+      prm_str = '  '.join(dd[2:4])  # 2 parameters
+      if class_num not in chgpen_params.keys():
+        chgpen_params[class_num] = prm_str
+      else:
+        print("Warning: there are two sets of chgpen parameters in the database")
+        print(f"One is {prm_str}, and the other is {chgpen_params[class_num]}")
+    
+    if (len(dd) > 0) and ("CHGTRN" == dd[0].upper()):
+      class_num = dd[1]
+      prm_str = '  '.join(dd[2:4])  # 2 parameters
+      if class_num not in chgtrn_params.keys():
+        chgtrn_params[class_num] = prm_str
+      else:
+        print("Warning: there are two sets of chgtrn parameters in the database")
+        print(f"One is {prm_str}, and the other is {chgtrn_params[class_num]}")
+    
+    if (len(dd) > 0) and ("REPULSION" == dd[0].upper()):
+      class_num = dd[1]
+      prm_str = '  '.join(dd[2:5])  # 3 parameters
+      if class_num not in repulsion_params.keys():
+        repulsion_params[class_num] = prm_str
+      else:
+        print("Warning: there are two sets of repulsion parameters in the database")
+        print(f"One is {prm_str}, and the other is {repulsion_params[class_num]}")
+    
+    if (len(dd) > 0) and ("DISPERSION" == dd[0].upper()):
+      class_num = dd[1]
+      prm_str = '  '.join(dd[2:4])  # 2 parameters
+      if class_num not in dispersion_params.keys():
+        dispersion_params[class_num] = prm_str
+      else:
+        print("Warning: there are two sets of dispersion parameters in the database")
+        print(f"One is {prm_str}, and the other is {dispersion_params[class_num]}")
+
+  # Map Tinker types to HIPPO classes to parameters
+  # Column 1=atomtype, 2=atomclass, 3=shortname, 4=HIPPO_class_number, 5=HIPPO_class, 6=description
+  # Read the type file to get descriptions
+  type_descriptions = {}
+  with open(f"{fname}.type.nonbonded_hippo") as f:
+    for line in f:
+      parts = line.split()
+      if len(parts) >= 6:
+        tinker_type = parts[1]
+        # Everything after column 5 is the description
+        description = ' '.join(parts[5:])
+        type_descriptions[tinker_type] = description
+  
+  ttypes, classs, stypes = np.loadtxt(f"{fname}.type.nonbonded_hippo", usecols=(1,2,4), unpack=True, dtype="str")
+  tinkerCPDict = {}
+  tinkerCTDict = {}
+  tinkerREPDict = {}
+  tinkerDISPDict = {}
+  
+  for t, c, s in zip(ttypes, classs, stypes): 
+    if t not in tinkerCPDict:
+      # stypes contains the HIPPO class number matched by SMARTS
+      # Skip atoms that didn't match any SMARTS pattern (s == '0')
+      if s != '0' and s in chgpen_params:
+        tinkerCPDict[t] = chgpen_params[s]
+        tinkerCTDict[t] = chgtrn_params[s]
+        tinkerREPDict[t] = repulsion_params[s]
+        tinkerDISPDict[t] = dispersion_params[s]
+      else:
+        print(f"{YELLOW}Warning: No HIPPO19 match for Tinker type {t} (SMARTS class={s}){ENDC}")
+  
+  # Write output
+  lines = open(key).readlines()
+  with open(key + "_nonbonded_hippo", "w") as f:
+    for t in tinkerCPDict:
+      desc = type_descriptions.get(t, "")
+      line = "chgpen  %5s %s  # %s\n"%(t, tinkerCPDict[t], desc)
+      f.write(line)
+    print(GREEN + "HIPPO19 charge penetration parameters assigned from database"+ ENDC)
+    
+    for t in tinkerCTDict:
+      desc = type_descriptions.get(t, "")
+      line = "chgtrn  %5s %s  # %s\n"%(t, tinkerCTDict[t], desc)
+      f.write(line)
+    print(GREEN + "HIPPO19 charge transfer parameters assigned from database" + ENDC)
+    
+    for t in tinkerREPDict:
+      desc = type_descriptions.get(t, "")
+      line = "repulsion  %5s %s  # %s\n"%(t, tinkerREPDict[t], desc)
+      f.write(line)
+    print(GREEN+"HIPPO19 repulsion parameters assigned from database"+ENDC)
+    
+    for t in tinkerDISPDict:
+      desc = type_descriptions.get(t, "")
+      line = "dispersion  %5s %s  # %s\n"%(t, tinkerDISPDict[t], desc)
+      f.write(line)
+    print(GREEN+"HIPPO19 dispersion parameters assigned from database"+ENDC)
+  
   return True
 
 def assignCFlux_general():
@@ -1171,12 +1335,14 @@ if __name__ == "__main__":
   parser.add_argument('-new_para', dest = 'new_para', help = "method to generate the new valence parameters", default="DATABASE", type=str.upper, choices=["HESSIAN", "DATABASE"])  
   parser.add_argument('-konly', dest = 'konly', help = "assign force constant only for valence parameters", default="YES", type=str.upper, choices=["YES", "NO"])  
   parser.add_argument('-cf4amoebaplus', dest = 'cf4amoebaplus', help = "apply special treatment of CF parms. for amoebaplus", default=False, type=bool)  
+  parser.add_argument('-hippo_alt', dest = 'hippo_alt', help = "HIPPO type file: 'v1' for hippo19Type_alt.dat, 'v2' for hippo19Type_alt_v2.dat (corrected)", default='v2', choices=['v1', 'v2'])
   args = vars(parser.parse_args())
-  global xyz, key, sdf, cf4amoebaplus 
+  global xyz, key, sdf, cf4amoebaplus, hippo_alt
   xyz = args["xyz"]
   key = args["key"]
   sdf = args["sdf"]
   cf4amoebaplus = args["cf4amoebaplus"]
+  hippo_alt = args["hippo_alt"]
   if key == None:
     write_tmp_key(xyz)
     key = xyz.split('.')[0] + '.key'
@@ -1207,6 +1373,10 @@ if __name__ == "__main__":
       assignBonded(new_para, fitting)
     elif (p == "NONBONDED"):
       assignNonbondedAMOEBAplus() 
+    elif (p == "NONBONDED_HIPPO"):
+      assignNonbondedHIPPO19()
+    elif (p == "POLAR_HIPPO"):
+      assignPolarHIPPO19()
     elif (p == "TORSION"):
       assignTorsionAMOEBA() 
     elif (p == "TORSION+"):

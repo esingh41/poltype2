@@ -1,0 +1,203 @@
+# ========================================================================
+# HIPPO-2019 Force Field Type Assignment Database
+# ========================================================================
+# SMARTS patterns mapping molecular substructures to HIPPO types/classes
+# 
+# Format: [SMARTS]  type_number  class_number  short_name  # Description
+#
+# Source annotations:
+#   [V] = Validated from AMOEBA+ database (exact or close match)
+#   [A] = Adapted from AMOEBA+ pattern for HIPPO
+#   [N] = New pattern created from HIPPO description
+#
+# Total: 186 atom types → 104 unique classes
+# Reference: /home/esingh41/gits/Tinker/params/hippo19.prm
+# AMOEBA+ Reference: dat/amoebaplusNonbondedType.dat
+# ========================================================================
+
+[$([CH3X4])]                                         1     1   T1       # Pentane CH3 [A] Terminal CH3
+[$([H][CH3X4])]                                      2     2   T2       # Pentane H3C [A] H on CH3
+[$([CH2X4])]                                         3     3   T3       # Pentane CH2-CH3 [A] CH2
+[$([H][CH2X4])]                                      4     4   T4       # Pentane H2C-CH3 [A] H on CH2
+[$([CH2X4])]                                         5     3   T5       # Pentane Middle -CH2- [A] CH2
+[$([H][CH2X4])]                                      6     4   T6       # Pentane Middle H2C< [A] H on CH2
+[$([CH3X4])]                                         7     1   T7       # Neopentane CH3 [A] Terminal CH3
+[$([H][CH3X4])]                                      8     2   T8       # Neopentane H3C [A] H on CH3
+[$([CX4H0]([CH3])([CH3])([CH3]))]                    9     5   T9       # Neopentane >C< [N] Quaternary C with 3+ methyls
+[$([CH2;r5])]                                       10     3   T10      # Cyclopentane -CH2- [V] CH2 in 5-ring
+[$([H][CH2;r5])]                                    11     4   T11      # Cyclopentane H2C< [A] H on CH2 in 5-ring
+[$([CX3]=[CX3])]                                    12     6   T12      # Ethene >C= [V] C in C=C
+[$([H][CX3]=[C])]                                   13     7   T13      # Ethene HC= [A] H on C=C
+[$([c;r6])]                                         14     8   T14      # Benzene C [V] Aromatic C in benzene
+[$([H][c;r6])]                                      15     9   T15      # Benzene H [A] H on aromatic C
+[$([OX2H2])]                                        16    10   T16      # Water O [V] From AMOEBA+ OW
+[$([H][OX2H2])]                                     17    11   T17      # Water H [V] From AMOEBA+ HW
+[$([OX2H1][CH3])]                                   18    12   T18      # Methanol O [V] O in methanol
+[$([H][OX2H1][CH3])]                                19    13   T19      # Methanol HO [A] HO in methanol
+[$([CH3][OX2H1])]                                   20    14   T20      # Methanol CH3 [A] CH3 in methanol
+[$([H][CH3][OX2H1])]                                21    15   T21      # Methanol H3C [A] H on CH3-OH
+[$([OX2H1][c;r6])]                                  22    16   T22      # Phenol OH [A] OH on phenol
+[$([H][OX2H1][c;r6])]                               23    17   T23      # Phenol HO [A] HO in phenol
+[$([c;r6][OX2H1])]                                  24     8   T24      # Phenol C1-OH [A] C-OH in phenol
+[$([c;r6])]                                         25     8   T25      # Phenol C2 [A] Aromatic C in phenol
+[$([c;r6])]                                         26     8   T26      # Phenol C3 [A] Aromatic C in phenol
+[$([c;r6])]                                         27     8   T27      # Phenol C4 [A] Aromatic C in phenol
+[$([H][c;r6])]                                      28     9   T28      # Phenol H2 [A] H on aromatic C
+[$([H][c;r6])]                                      29     9   T29      # Phenol H3 [A] H on aromatic C
+[$([NX3H2][CH3])]                                   30     9   T30      # Phenol H4 [N] N in methylamine
+[$([H][NX3H2][C])]                                  31    18   T31      # Methyl Amine N [N] H on NH2
+[$([CH3][NX3H2])]                                   32    19   T32      # Methyl Amine H2N [N] CH3 in methylamine
+[$([H][CH3][NX3H2])]                                33    20   T33      # Methyl Amine CH3 [N] H on CH3-NH2
+[$([NX3H1]([CH3])[CH3])]                            34    21   T34      # Methyl Amine H3C [N] N in dimethylamine
+[$([H][NX3H1]([CH3])[CH3])]                         35    22   T35      # Methyl Ammonium N+ [N] H on N(CH3)2
+[$([NX3H0]([CH3])([CH3])[CH3])]                     36    23   T36      # Methyl Ammonium H3N+ [N] N in trimethylamine
+[$([NX3H1;r5])]                                     37    24   T37      # Methyl Ammonium CH3 [N] N in pyrrolidine
+[$([H][NX3H1;r5])]                                  38    25   T38      # Methyl Ammonium H3C [N] H on pyrrolidine N
+[$([CH2;r5][NX3;r5])]                               39    26   T39      # Pyrrolidine N [N] C-N in pyrrolidine
+[$([H][CH2;r5][NX3;r5])]                            40    27   T40      # Pyrrolidine HN [N] H on C-N pyrrolidine
+[$([CH2;r5])]                                       41    28   T41      # Pyrrolidine CH2-N [N] CH2 in pyrrolidine
+[$([H][CH2;r5])]                                    42    29   T42      # Pyrrolidine H2C-N [N] H on CH2 pyrrolidine
+[$([NH4+])]                                         43    28   T43      # Pyrrolidine C-CH2-C [N] Ammonium NH4+
+[$([H][NH4+])]                                      44    29   T44      # Pyrrolidine C-CH2-C [N] H on NH4+
+[$([NH3+][CH3])]                                    45    30   T45      # Methyl Sulfide S [N] N in CH3NH3+
+[$([H][NH3+][C])]                                   46    31   T46      # Methyl Sulfide HS [N] H on NH3+
+[$([CH3][NH3+])]                                    47    32   T47      # Methyl Sulfide CH3 [N] CH3 in methylammonium
+[$([H][CH3][NH3+])]                                 48    33   T48      # Methyl Sulfide H3C [N] H on CH3-NH3+
+[$([NX4+]([CH3])([CH3])([CH3])[CH3])]               49    30   T49      # Dimethyl Sulfide S [N] N in (CH3)4N+
+[$([CH3][NX4+])]                                    50    32   T50      # Dimethyl Sulfide CH3 [N] CH3 on N+
+[$([H][CH3][NX4+])]                                 51    33   T51      # Dimethyl Sulfide H3C [N] H on CH3-N+
+[$([NH2+]([CH3])[CH3])]                             52    34   T52      # Acetic Acid OH [N] N in (CH3)2NH2+
+[$([H][NH2+]([CH3])[CH3])]                          53    35   T53      # Acetic Acid HO [N] H on (CH3)2NH2+
+[$([NH+]([CH3])([CH3])[CH3])]                       54    36   T54      # Acetic Acid C=O [N] N in (CH3)3NH+
+[$([H][NH+]([CH3])([CH3])[CH3])]                    55    37   T55      # Acetic Acid O=C [N] H on (CH3)3NH+
+[$([NH2+;r5])]                                      56    38   T56      # Acetic Acid CH3 [N] N in pyrrolidinium
+[$([H][NH2+;r5])]                                   57    39   T57      # Acetic Acid H3C [N] H on pyrrolidinium N
+[$([SX2H1][CH3])]                                   58    40   T58      # Acetate CO2- [N] S in methanethiol
+[$([H][SX2H1][C])]                                  59    41   T59      # Acetate O- [N] H on SH
+[$([CH3][SX2H1])]                                   60    38   T60      # Acetate CH3 [N] CH3 in methanethiol
+[$([H][CH3][SX2H1])]                                61    39   T61      # Acetate H3C [N] H on CH3-SH
+[$([SX2]([CH3])[CH3])]                              62    42   T62      # Acetamide C=O [N] S in dimethyl sulfide
+[$([CH3][SX2][CH3])]                                63    43   T63      # Acetamide O [N] CH3 in (CH3)2S
+[$([H][CH3][SX2][CH3])]                             64    44   T64      # Acetamide N [N] H on CH3-S-CH3
+[$([SX2][SX2])]                                     65    45   T65      # Acetamide H2N [N] S in disulfide
+[$([CX3](=[OX1])[OX2H1])]                           66    46   T66      # Acetamide CH3 [N] C in COOH
+[$([OX1]=[CX3][OX2H1])]                             67    47   T67      # Acetamide H3C [N] O= in COOH
+[$([OX2H1][CX3]=[OX1])]                             68    42   T68      # NMeAcetamide C=O [N] OH in COOH
+[$([H][OX2][CX3]=[OX1])]                            69    43   T69      # NMeAcetamide O [N] HO in COOH
+[$([CH3][CX3](=[OX1])[OX2H1])]                      70    44   T70      # NMeAcetamide N [N] CH3 in acetic acid
+[$([H][CH3][CX3](=[OX1])[OX2])]                     71    45   T71      # NMeAcetamide HN [N] H on CH3-COOH
+[$([c;r6][CX3](=[OX1])[OX2H1])]                     72    48   T72      # NMeAcetamide CH3-N [N] C-COOH aromatic
+[$([H][c;r6][CX3](=[OX1])[OX2])]                    73    49   T73      # NMeAcetamide H3C-N [N] H on C-COOH aromatic
+[$([CX3](=[OX1])[O-])]                              74    46   T74      # NMeAcetamide CH3-C [N] C in COO-
+[$([OX1]=[CX3][O-])]                                75    47   T75      # NMeAcetamide H3C-C [N] O in COO-
+[$([O-][CX3]=[OX1])]                                76    50   T76      # Methyl Fluoride F [N] O- in COO-
+[$([CH3][CX3](=[OX1])[O-])]                         77    51   T77      # Methyl Fluoride CH3 [N] CH3 in acetate
+[$([H][CH3][CX3](=[OX1])[O-])]                      78    52   T78      # Methyl Fluoride H3C [N] H on CH3-COO-
+[$([c;r6][CX3](=[OX1])[O-])]                        79    53   T79      # Methyl Chloride Cl [N] C-COO- aromatic
+[$([H][c;r6][CX3](=[OX1])[O-])]                     80    51   T80      # Methyl Chloride CH3 [N] H on C-COO- aromatic
+[$([H][CH3][ClX1])]                                      81    52   T81      # Methyl Chloride H3C [N] H on CH3 bonded to Cl
+[$([CX3H1](=[OX1])[CH3])]                           82    54   T82      # Methyl Bromide Br [N] C in CHO
+[$([H][CX3](=[OX1])[C])]                            83    51   T83      # Methyl Bromide CH3 [N] H on CHO
+[$([OX1]=[CX3H1][C])]                               84    52   T84      # Methyl Bromide H3C [N] O in CHO
+[$([CH3][CX3H1]=[OX1])]                             85    50   T85      # Methylene Fluoride F [N] CH3 in acetaldehyde
+[$([H][CH3][CX3H1]=[OX1])]                          86    55   T86      # Methylene Fluoride CH2 [N] H on CH3-CHO
+[$([c;r6][CX3H1]=[OX1])]                            87    56   T87      # Methylene Fluoride H2C [N] C-CHO aromatic
+[$([H][c;r6][CX3H1]=[OX1])]                         88    53   T88      # Methylene Chloride Cl [N] H on C-CHO aromatic
+[$([CH2]([ClX1])[ClX1])]                                      89    55   T89      # Methylene Chloride CH2 [N] C in CH2Cl2
+[$([CX3](=[OX1])([CH3])[CH3])]                      90    56   T90      # Methylene Chloride H2C [N] C in C=O ketone
+[$([OX1]=[CX3]([CH3])[CH3])]                        91    54   T91      # Methylene Bromide Br [N] O in ketone
+[$([CH3][CX3](=[OX1])[CH3])]                        92    55   T92      # Methylene Bromide CH2 [N] CH3 in acetone
+[$([H][CH3][CX3](=[OX1])[CH3])]                     93    56   T93      # Methylene Bromide H2C [N] H on CH3-CO-CH3
+[$([c;r6][CX3](=[OX1])[CH3])]                       94    50   T94      # FluoroBenzene F [N] C-CO aromatic
+[$([H][c;r6][CX3](=[OX1])[C])]                      95     8   T95      # FluoroBenzene C1-F [N] H on C-CO aromatic
+[$([CH3][CX3](=[OX1])[c;r6])]                       96     8   T96      # FluoroBenzene C2 [N] CH3 in acetophenone
+[$([H][CH3][CX3](=[OX1])[c;r6])]                    97     8   T97      # FluoroBenzene C3 [N] H on CH3-CO-Ph
+[$([CX3H1](=[OX1])[OX2][CH3])]                      98     8   T98      # FluoroBenzene C4 [N] C in HCOO
+[$([H][CX3](=[OX1])[OX2][C])]                       99     9   T99      # FluoroBenzene H2 [N] H on HC=O ester
+[$([OX1]=[CX3][OX2][C])]                           100     9   T100     # FluoroBenzene H3 [N] O= in ester
+[$([OX2]([CX3]=[OX1])[CH3])]                       101     9   T101     # FluoroBenzene H4 [N] O-CH3 in ester
+[$([CH3][OX2][CX3]=[OX1])]                         102    53   T102     # ChloroBenzene Cl [N] CH3 in formate
+[$([H][CH3][OX2][CX3]=[OX1])]                      103     8   T103     # ChloroBenzene C1-Cl [N] H on OCH3 ester
+[$([CH3][CX3](=[OX1])[OX2][CH3])]                  104     8   T104     # ChloroBenzene C2 [N] CH3 in acetate
+[$([H][CH3][CX3](=[OX1])[OX2][C])]                 105     8   T105     # ChloroBenzene C3 [N] H on CH3-CO ester
+[$([c;r6][CX3](=[OX1])[OX2][CH3])]                 106     8   T106     # ChloroBenzene C4 [N] C-COO aromatic
+[$([H][c;r6][CX3](=[OX1])[OX2])]                   107     9   T107     # ChloroBenzene H2 [N] H on C-COO ester
+[$([H][c;r6])]                                     108     9   T108     # ChloroBenzene H3 [N] H aromatic in benzoate
+[$([CH3][OX2][CX3](=[OX1])[c;r6])]                 109     9   T109     # ChloroBenzene H4 [N] OCH3 in benzoate
+[$([OX2]([CH3])[CH3])]                             110    54   T110     # BromoBenzene Br [N] O in ether
+[$([CH3][OX2][CH3])]                               111     8   T111     # BromoBenzene C1-Br [N] CH3 in dimethyl ether
+[$([H][CH3][OX2][CH3])]                            112     8   T112     # BromoBenzene C2 [N] H on CH3-O-CH3
+[$([OX2]([c;r6])[CH3])]                            113     8   T113     # BromoBenzene C3 [N] O in anisole
+[$([c;r6][OX2][CH3])]                              114     8   T114     # BromoBenzene C4 [N] C-O aromatic
+[$([H][c;r6][OX2])]                                115     9   T115     # BromoBenzene H2 [N] H on C-O aromatic
+[$([CH3][OX2][c;r6])]                              116     9   T116     # BromoBenzene H3 [N] OCH3 in anisole
+[$([H][CH3][OX2][c;r6])]                           117     9   T117     # BromoBenzene H4 [N] H on OCH3 anisole
+[$([CX3H1](=[OX1])[NX3H2])]                        118    57   T118     # Pyridine N [N] C in HCONH2
+[$([H][CX3](=[OX1])[NX3])]                         119    58   T119     # Pyridine C2 [N] H on HC=O amide
+[$([OX1]=[CX3][NX3])]                              120     8   T120     # Pyridine C3 [N] O in amide
+[$([NX3H2][CX3]=[OX1])]                            121     8   T121     # Pyridine C4 [N] N in primary amide
+[$([H][NX3H2][CX3]=[OX1])]                         122    59   T122     # Pyridine H2 [N] H on NH2 amide
+[$([CH3][CX3](=[OX1])[NX3H2])]                     123     9   T123     # Pyridine H3 [N] CH3 in acetamide
+[$([H][CH3][CX3](=[OX1])[NX3])]                    124     9   T124     # Pyridine H4 [N] H on CH3-CO amide
+[$([NX3H1]([CX3]=[OX1])[CH3])]                     125    60   T125     # Imidazole NH [N] N in secondary amide
+[$([H][NX3H1]([CX3]=[OX1])[C])]                    126    61   T126     # Imidazole HN [N] H on NH amide
+[$([CH3][NX3]([CX3]=[OX1])[C])]                    127    62   T127     # Imidazole N=C [N] NCH3 in amide
+[$([H][CH3][NX3]([CX3]=[OX1])[C])]                 128    63   T128     # Imidazole N-CH=N [N] H on NCH3 amide
+[$([c;r6][CX3](=[OX1])[NX3])]                      129    64   T129     # Imidazole HC=N [N] C-CO aromatic amide
+[$([c;r5]1[nH;r5][c;r5][n;r5][c;r5]1)]             130    65   T130     # Imidazole C-N=C [N] C2 in imidazole
+[$([H][c;r5]1[nH;r5][c;r5][n;r5][c;r5]1)]          131    64   T131     # Imidazole HC-N=C [N] H on C2 imidazole
+[$([nH;r5]1[c;r5][n;r5][c;r5][c;r5]1)]             132    66   T132     # Imidazole C-NHC=N- [N] N1 in imidazole
+[$([H][nH;r5]1[c;r5][n;r5][c;r5][c;r5]1)]          133    64   T133     # Imidazole HC-NHC=N- [N] H on N1 imidazole
+[$([n;r5]1[c;r5][c;r5][nH;r5][c;r5]1)]             134    67   T134     # Imidazolium NH [N] N3 in imidazole
+[$([c;r5]1[nH;r5][c;r5][n;r5][c;r5]1)]             135    68   T135     # Imidazolium HN [N] C4 in imidazole
+[$([H][c;r5]1[nH;r5][c;r5][n;r5][c;r5]1)]          136    69   T136     # Imidazolium N-CH-N [N] H on C4 imidazole
+[$([c;r5]1[c;r5][nH;r5][c;r5][n;r5]1)]             137    70   T137     # Imidazolium N-HC-N [N] C5 in imidazole
+[$([H][c;r5]1[c;r5][nH;r5][c;r5][n;r5]1)]          138    71   T138     # Imidazolium C=C [N] H on C5 imidazole
+[$([nH+;r5])]                                      139    72   T139     # Imidazolium H-C=C [N] N in imidazolium
+[$([s;r5])]                                        140    73   T140     # Indole N [N] S in thiophene
+[$([c;r5][s;r5])]                                  141    74   T141     # Indole HN [N] C-S in thiophene
+[$([H][c;r5][s;r5])]                               142    75   T142     # Indole C2 [N] H on C-S thiophene
+[$([c;r5]1[s;r5][c;r5][c;r5][c;r5]1)]              143    76   T143     # Indole C3 [N] C in thiophene
+[$([H][c;r5]1[s;r5][c;r5][c;r5][c;r5]1)]           144    77   T144     # Indole C4 [N] H on C thiophene
+[$([o;r5])]                                        145     8   T145     # Indole C5 [N] O in furan
+[$([c;r5][o;r5])]                                  146     8   T146     # Indole C6 [N] C-O in furan
+[$([H][c;r5][o;r5])]                               147    78   T147     # Indole C7 [N] H on C-O furan
+[$([c;r5]1[o;r5][c;r5][c;r5][c;r5]1)]              148    79   T148     # Indole C3a [N] C in furan
+[$([H][c;r5]1[o;r5][c;r5][c;r5][c;r5]1)]           149    80   T149     # Indole C7a [N] H on C furan
+[$([nH;r5]1[c;r5][c;r5][c;r5][c;r5]1)]             150     9   T150     # Indole HC2 [N] N in pyrrole
+[$([H][nH;r5]1[c;r5][c;r5][c;r5][c;r5]1)]          151     9   T151     # Indole HC3 [N] H on N pyrrole
+[$([c;r5][nH;r5])]                                 152     9   T152     # Indole HC4 [N] C-N in pyrrole
+[$([H][c;r5][nH;r5])]                              153     9   T153     # Indole HC5 [N] H on C-N pyrrole
+[$([c;r5]1[nH;r5][c;r5][c;r5][c;r5]1)]             154     9   T154     # Indole HC6 [N] C in pyrrole
+[$([H][c;r5]1[nH;r5][c;r5][c;r5][c;r5]1)]          155     9   T155     # Indole HC7 [N] H on C pyrrole
+[$([nH;r5]1[c;r5][c;r6]2[c;r6][c;r6][c;r6][c;r6][c;r6]12)] 156    81   T156     # Guanidinium N [N] N in indole
+[$([H][nH;r5]1[c;r5][c;r6]2[c;r6][c;r6][c;r6][c;r6][c;r6]12)] 157    82   T157     # Guanidinium H2N [N] H on N indole
+[$([c;r5]1[nH;r5][c;r6]2[c;r6][c;r6][c;r6][c;r6][c;r6]12)] 158    83   T158     # Guanidinium C [N] C2 in indole
+[$([H][c;r5]1[nH;r5][c;r6]2[c;r6][c;r6][c;r6][c;r6][c;r6]12)] 159    84   T159     # Dimethyl Sulfoxide S=O [N] H on C2 indole
+[$([c;r5]1[c;r5][nH;r5][c;r6]2[c;r6][c;r6][c;r6][c;r6][c;r6]12)] 160    85   T160     # Dimethyl Sulfoxide S=O [N] C3 in indole
+[$([H][c;r5]1[c;r5][nH;r5][c;r6]2[c;r6][c;r6][c;r6][c;r6][c;r6]12)] 161    86   T161     # Dimethyl Sulfoxide CH3 [N] H on C3 indole
+[$([c;r6]1[c;r6][c;r6][c;r6][c;r6]2[c;r6]1[nH;r5][c;r5][c;r5]2)] 162    87   T162     # Dimethyl Sulfoxide H3C [N] C in indole 6-ring
+[$([H][c;r6]1[c;r6][c;r6][c;r6][c;r6]2[c;r6]1[nH;r5][c;r5][c;r5]2)] 163    88   T163     # Phosphoric Acid P [N] H on C indole 6-ring
+[$([c;r6]1[c;r6][c;r6][c;r6]2[c;r5][c;r5][nH;r5][c;r6]2[c;r6]1)] 164    89   T164     # Phosphoric Acid O=P [N] C in indole bridge
+[$([H][c;r6]1[c;r6][c;r6][c;r6]2[c;r5][c;r5][nH;r5][c;r6]2[c;r6]1)] 165    90   T165     # Phosphoric Acid P-O-H [N] H on C indole bridge
+[$([H][OX2][PX4])]                                     166    91   T166     # Phosphoric Acid H-O-P [N] H on O bonded to P
+[$([n;r6]1[c;r6][c;r6][c;r6][c;r6][c;r6]1)]        167    88   T167     # DiH Phosphate P [N] N in pyridine
+[$([c;r6][n;r6])]                                  168    92   T168     # DiH Phosphate P-O- [N] C-N in pyridine
+[$([H][c;r6][n;r6])]                               169    90   T169     # DiH Phosphate P-O-H [N] H on C-N pyridine
+[$([c;r6]1[c;r6][n;r6][c;r6][c;r6][c;r6]1)]        170    91   T170     # DiH Phosphate H-O-P [N] C in pyridine
+[$([H][c;r6]1[c;r6][n;r6][c;r6][c;r6][c;r6]1)]     171    88   T171     # MonoH Phosphate P [N] H on C pyridine
+[$([nH+;r6])]                                      172    92   T172     # MonoH Phosphate P-O- [N] N in pyridinium
+[$([H][nH+;r6])]                                   173    90   T173     # MonoH Phosphate P-O-H [N] H on N+ pyridinium
+[$([c;r6][nH+;r6])]                                174    91   T174     # MonoH Phosphate H-O-P [N] C-N+ in pyridinium
+[$([FX1][CH3])]                                    175    93   T175     # Uracil C2 [N] F in CH3F
+[$([CH3][FX1])]                                    176    94   T176     # Uracil C6 [N] CH3 in fluoromethane
+[$([H][CH3][FX1])]                                 177    95   T177     # Uracil C4 [N] H on CH3F
+[$([FX1][CH2])]                                    178    96   T178     # Uracil N3 [N] F on CH2
+[$([ClX1][CH3])]                                   179    97   T179     # Uracil N1 [N] Cl in CH3Cl
+[$([ClX1][CH2])]                                   180    98   T180     # Uracil C5 [N] Cl on CH2
+[$([BrX1][CH3])]                                   181    99   T181     # Uracil H1 [N] Br in CH3Br
+[$([BrX1][CH2])]                                   182   100   T182     # Uracil H3 [N] Br on CH2
+[$([IX1][CH3])]                                    183   101   T183     # Uracil H5 [N] I in CH3I
+[$([IX1][CH2])]                                    184   102   T184     # Uracil O2 [N] I on CH2
+[$([FX1][c;r6])]                                   185   103   T185     # Uracil O4 [N] F on aromatic
+[$([ClX1][c;r6])]                                  186   104   T186     # Uracil H6 [N] Cl on aromatic
