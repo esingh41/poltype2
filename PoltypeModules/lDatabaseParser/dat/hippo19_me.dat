@@ -15,7 +15,7 @@
 [$([CX4H2;r5])]                               3    3    T3       # "Cyclopentane -CH2-"
 [$([H][CX4H2;r5])]                            4    4    T4       # "Cyclopentane H2C<"
 
-[$([C]=[C])]                                 6    6    T6        # "Ethene >C="
+[$([C]=[C])]                                  6    6    T6        # "Ethene >C="
 [$([H][CH1]=[C])]                             7    7    T7       # "Ethene HC="
 
 [$([c])]                                      8    8    T8       # "Benzene C"
@@ -101,17 +101,17 @@
 [$([H][c])]                                   9    9    T9       # "Aryl H"
 
 [nH0;r6]                                      57   57   T57      # "Pyridine N"
-[c;r6]                                        58   58   T58      # "Pyridine C"
-[$([H][c;r6])]                                59   59   T59      # "Pyridine H"
+[$([c][NH0])]                                 58   58   T58      # "Pyridine C"
+[n]1[cH]cccc1                                 59   59   T59      # "Pyridine H"
 
 [nH1;r5]                                      60   60   T60      # "Imidazole NH"
 [nH0;r5]                                      62   62   T62      # "Imidazole N=C"
 [c;r5]                                        63   63   T63      # "Imidazole C"
 [$([H][c;r5])]                                64   64   T64      # "Imidazole H"
 
-[nH1]                                         73   73   T73      # "Indole N"
+[nH1;r6]                                      73   73   T73      # "Indole N"
 [$([H][nH1])]                                 74   74   T74      # "Indole HN"
-[c]                                           75   75   T75      # "Indole C"
+[$([c](a)(a)[a])]                             75   75   T75      # "Indole C"
 [$([H][c])]                                   9    9    T9       # "Indole H"
 
 [$([SX3](=O)([CX4])[CX4])]                    84   84   T84      # "Dimethyl Sulfoxide S=O"
@@ -129,20 +129,20 @@
 [$([H][NX3H2])]                               82   82   T82      # "Guanidinium H2N"
 [$([CX3](=[NX3H2])[NX3H2])]                   83   83   T83      # "Guanidinium C"
 
-[nH1]                                         96   96   T96      # "Uracil N"
-[c]                                           93   93   T93      # "Uracil C"
+[n;R1;H1]c=O                                  96   96   T96      # "Uracil N"
+[n;R1;H1]c=O                                  96   96   T96      # "Uracil N"
+[c]([n])[n]                                   93   93   T93      # "Uracil C2"
 [$([H][c])]                                   99   99   T99      # "Uracil H"
-[$([O]=[c])]                                102  102  T102     # "Uracil O"
 
 [$([CX3](=O)[NX3][CX3]=[CX3][NX3])]           93   93   T93      # "Uracil C2"
 [$([CX3](=O)[NX3][CX3H1][CX3H1][NX3])]        95   95   T95      # "Uracil C4"
 [$([CX3H1][CX3](=O)[NX3])]                    98   98   T98      # "Uracil C5"
 [$([CX3H1][NX3][CX3](=O))]                    94   94   T94      # "Uracil C6"
 
-[$([NX3H1][CX3](=O)[NX3][CX3])]               97   97   T97      # "Uracil N1"
-[$([NX3H1][CX3](=O)[CX3][NX3])]               96   96   T96      # "Uracil N3"
-[$([O]=[CX3][NX3])]                           102  102  T102     # "Uracil O2"
-[$([O]=[CX3][NX3][CX3])]                      103  103  T103     # "Uracil O4"
+[n;X3]([c](=O))[c]                            97   97   T97      # "Uracil N1"
+[n]([c](=O))[c](=O)                           96   96   T96      # "Uracil N3"
+[$([O]=[cX3][nX3])]                           102  102  T102     # "Uracil O2"
+[$([O]=[cX3][nX3][cX3])]                      103  103  T103     # "Uracil O4"
 
-[$([H][CX3H1][CX3](=O)[NX3])]                 101  101  T101     # "Uracil H5"
-[$([H][CX3H1][NX3][CX3](=O))]                 104  104  T104     # "Uracil H6"
+[$([H][cX3H1][cX3](=O)[nX3])]                 101  101  T101     # "Uracil H5"
+[$([H][cX3H1][nX3][cX3](=O))]                 104  104  T104     # "Uracil H6"
