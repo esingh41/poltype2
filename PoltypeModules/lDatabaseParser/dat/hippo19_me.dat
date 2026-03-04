@@ -1,3 +1,10 @@
+[#1]                                          2   2   T2         # Hydrogen (atomic 1)
+[HN]                                          45  45  T45        # DEFAULT Hydrogen bonded to nitrogen
+[HO]                                          11  11   11        # DEFAULT Hydrogen bonded to oxygen
+[HS]                                          31   31   T31      # "Methyl Sulfide HS"
+[#6]                                          1  1      T1       # DEFAULT carbon (handles tb cases)
+[Nx3]                                         81   81   T81      # DEFAULT Nitrogen (atomic 7)
+
 [$([CX4H3][CX4])]                             1    1    T1       # "Pentane CH3"
 [$([H][CX4H3])]                               2    2    T2       # "Pentane H3C"
 
