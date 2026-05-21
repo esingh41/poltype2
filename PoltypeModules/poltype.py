@@ -232,7 +232,7 @@ class PolarizableTyper():
         scaleandfixdipole:bool=False
         scalebigmultipole:bool=False
         fragbigmultipole:bool=True
-        sp2aniline:bool=False
+        sp2aniline:bool=True
         nonplanarphenol:bool=False
         chargethreshold:float=1.5
         dipolethreshold:float=1.5
@@ -2621,12 +2621,15 @@ class PolarizableTyper():
             pythonpath=os.path.join(xtbenvpath,'bin')
             xtbpath=os.path.join(pythonpath,'xtb')
             nonplanarphenol = self.nonplanarphenol
+            sp2aniline = self.sp2aniline
+            script = os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'lConformerGenerator.py')
+            cmdstr = f"python \"{script}\" -i {self.molstructfname} -p {xtbpath}"
             if nonplanarphenol:
-              cmdstr = f"python \"{os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'lConformerGenerator.py')}\" -i {self.molstructfname} -p {xtbpath} --npp"
-            else:
-              cmdstr = f"python \"{os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'lConformerGenerator.py')}\" -i {self.molstructfname} -p {xtbpath}"
-              
-            self.WriteToLog('Calling: '+cmdstr) 
+              cmdstr += " --npp"
+            if sp2aniline:
+              cmdstr += " --sp2aniline"
+
+            self.WriteToLog('Calling: '+cmdstr)
             os.system(cmdstr)
             name = "conftest.mol" 
             indextocoordslist=[]
