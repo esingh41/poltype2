@@ -106,7 +106,7 @@ if __name__ == "__main__":
   parser.add_argument('-o', dest = 'outputfile', help = "Output file name. Default: conftest.mol", default='conftest.mol')  
   parser.add_argument('-f', dest = 'inputformat', help = "Input file format. Default: SDF", choices = ['SDF', 'MOL2'], type=str.upper, default='SDF')  
   parser.add_argument('--npp', dest = 'nonplanarphenol', help = "Flag to generate nonplanar phenol. Default: False", default=False, action='store_true')
-  parser.add_argument('--sp2aniline', dest = 'sp2aniline', help = "Flag to enforce planar (sp2) NH2 on aniline-like molecules. Default: False", default=False, action='store_true')
+  parser.add_argument('-sp2aniline', dest = 'sp2aniline', choices=['True', 'False'], default='True', help="Enforce planar (sp2) NH2 on aniline-like molecules. Accepts True/False. Default: True")
 
   args = vars(parser.parse_args())
 
@@ -115,10 +115,10 @@ if __name__ == "__main__":
   inputformat = args['inputformat']
   xtbpath = args['xtbpath']
   nonplanarphenol = args['nonplanarphenol']
-  sp2aniline = args['sp2aniline']
+  sp2aniline = (args['sp2aniline'] == 'True')
 
   if sp2aniline and nonplanarphenol:
-    sys.exit('ERROR: --sp2aniline and --npp are mutually exclusive '
+    sys.exit('ERROR: -sp2aniline True and --npp are mutually exclusive '
              '(planar vs out-of-plane NH2). Set only one of '
              'sp2aniline / nonplanarphenol in poltype.ini.')
 
@@ -126,7 +126,7 @@ if __name__ == "__main__":
     print('User is requesting nonplanar OH/SH/NH for phenol-like molecules')
 
   if sp2aniline:
-    print('User is requesting planar (sp2) NH2 for aniline-like molecules')
+    print('Enforcing planar (sp2) NH2 for aniline-like molecules')
 
   if inputformat == 'MOL2':
     m1 = Chem.MolFromMol2File(inputfile,removeHs=False)

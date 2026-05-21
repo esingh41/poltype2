@@ -2623,11 +2623,9 @@ class PolarizableTyper():
             nonplanarphenol = self.nonplanarphenol
             sp2aniline = self.sp2aniline
             script = os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'lConformerGenerator.py')
-            cmdstr = f"python \"{script}\" -i {self.molstructfname} -p {xtbpath}"
+            cmdstr = f"python \"{script}\" -i {self.molstructfname} -p {xtbpath} -sp2aniline {sp2aniline}"
             if nonplanarphenol:
               cmdstr += " --npp"
-            if sp2aniline:
-              cmdstr += " --sp2aniline"
 
             self.WriteToLog('Calling: '+cmdstr)
             os.system(cmdstr)
