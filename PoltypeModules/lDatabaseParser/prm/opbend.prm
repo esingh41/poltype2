@@ -578,3 +578,4 @@ opbend    35    116      0      0         18.2274
 opbend    33    101      0      0          14.00
 opbend    34    100      0      0          14.00
 opbend    50    172      0      0          14.00
+opbend        40        40         0         0          28.0  # C=C in non-aromatic ring (C2R5), amoeba18-style k
