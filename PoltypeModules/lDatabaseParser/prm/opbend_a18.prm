@@ -18,3 +18,4 @@
 [#8][#5]([*])[*]           70.5   % 0,1 % O-->BX2
 [#1][#5]([#1])[*]          12.9   % 0,1 % H-->BH2
 [*]~[$([c,n;R2])]                 300.0   % 0,1   % X-->sp2 atom in fused ring (every opbend around ring-fusion aromatic C/N), k=300
+[$([c,n;R2])]~[$([c,n;R2])]       300.0   % 1,0   % fused-fused reverse direction (opbend center = the other ring-fusion atom; needed because assignOpbendA09 uses pybel findall, which dedups symmetric bonds)
