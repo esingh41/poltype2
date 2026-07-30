@@ -105,18 +105,28 @@ if __name__ == "__main__":
   parser.add_argument('-p', dest = 'xtbpath', help = "Absolute path of xtb executable", required=True)  
   parser.add_argument('-o', dest = 'outputfile', help = "Output file name. Default: conftest.mol", default='conftest.mol')  
   parser.add_argument('-f', dest = 'inputformat', help = "Input file format. Default: SDF", choices = ['SDF', 'MOL2'], type=str.upper, default='SDF')  
-  parser.add_argument('--npp', dest = 'nonplanarphenol', help = "Flag to generate nonplanar phenol. Default: False", default=False, action='store_true')  
-  
+  parser.add_argument('--npp', dest = 'nonplanarphenol', help = "Flag to generate nonplanar phenol. Default: False", default=False, action='store_true')
+  parser.add_argument('-sp2aniline', dest = 'sp2aniline', choices=['True', 'False'], default='True', help="Enforce planar (sp2) NH2 on aniline-like molecules. Accepts True/False. Default: True")
+
   args = vars(parser.parse_args())
-  
+
   inputfile = args['inputfile']
   outputfile = args['outputfile']
   inputformat = args['inputformat']
   xtbpath = args['xtbpath']
   nonplanarphenol = args['nonplanarphenol']
+  sp2aniline = (args['sp2aniline'] == 'True')
+
+  if sp2aniline and nonplanarphenol:
+    sys.exit('ERROR: -sp2aniline True and --npp are mutually exclusive '
+             '(planar vs out-of-plane NH2). Set only one of '
+             'sp2aniline / nonplanarphenol in poltype.ini.')
 
   if nonplanarphenol:
     print('User is requesting nonplanar OH/SH/NH for phenol-like molecules')
+
+  if sp2aniline:
+    print('Enforcing planar (sp2) NH2 for aniline-like molecules')
 
   if inputformat == 'MOL2':
     m1 = Chem.MolFromMol2File(inputfile,removeHs=False)
@@ -178,13 +188,22 @@ if __name__ == "__main__":
     x, y, a1, a2 = match
     phenol_like_torsions.append([x, y, a1, a2])
   
-  aniline_like_torsions = [] 
+  aniline_like_torsions = []
   pattern = Chem.MolFromSmarts('[H][NH2][a][a]')
   matches = m1.GetSubstructMatches(pattern)
   for i in range(0,len(matches),4):
     match = matches[i]
     x, y, a1, a2 = match
     aniline_like_torsions.append([x, y, a1, a2])
+
+  # sp2 aniline: improper N-Ca-H1-H2 = 0 keeps NH2 four atoms coplanar
+  # SMARTS / atom order mirror optimization.py:391-395
+  sp2_aniline_impropers = []
+  pattern = Chem.MolFromSmarts('[NH2]([H])([H])[a]')
+  matches = m1.GetSubstructMatches(pattern)
+  for match in matches:
+    n, h1, h2, ca = match
+    sp2_aniline_impropers.append([n, ca, h1, h2])
 
   ffps = ChemicalForceFields.MMFFGetMoleculeProperties(m1)
   converged = []
@@ -199,7 +218,11 @@ if __name__ == "__main__":
       for amide_torsion in amide_torsions:
         t1,t2,t3,t4 = amide_torsion
         ff.MMFFAddTorsionConstraint(t1, t2, t3, t4, False, 0.0, 0.0, 100.0)
-    
+
+    if sp2aniline:
+      for n, ca, h1, h2 in sp2_aniline_impropers:
+        ff.MMFFAddTorsionConstraint(n, ca, h1, h2, False, 0.0, 0.0, 100.0)
+
     if nonplanarphenol:
       # add torsion restraint for phenol-like torsion
       if phenol_like_torsions != []:
@@ -288,7 +311,11 @@ if __name__ == "__main__":
       idx1, idx2 = k.split('-')
       # here we set distance involving IHB
       f.write(f"  distance: {int(idx1)+1}, {int(idx2)+1}, auto\n")
-    
+
+    if sp2aniline:
+      for n, ca, h1, h2 in sp2_aniline_impropers:
+        f.write(f"  dihedral: {n+1},{ca+1},{h1+1},{h2+1},0.0\n")
+
     if nonplanarphenol:
       if len(phenol_like_torsions) != 0:
         # here we set dihedral involving phenol-like molecules

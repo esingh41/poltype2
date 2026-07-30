@@ -179,7 +179,19 @@ def CreatePsi4OPTInputFile(poltype,comfilecoords,comfilename,mol,modred,bondangl
         temp.write(" 'convergence_set' : 'GAU_LOOSE',"+'\n')
         temp.write(" 'convergence_energy' : 1e-4,"+'\n')
 
-    if len(torsionrestraints)!=0:
+    # sp2 aniline: improper dihedral N-Ca-H1-H2 driven to 0 keeps NH2 planar.
+    # geomeTRIC 'dihedral' accepts any 4 atoms (no chain check); optking has no
+    # fixed_oofp so only the geomeTRIC path carries the constraint here.
+    # SMARTS / atom order mirror gen_optcomfile sp2aniline block (line 391).
+    sp2_aniline_impropers = []
+    if poltype.sp2aniline:
+        _rdkitmol = Chem.MolFromMolFile(poltype.molstructfname, removeHs=False)
+        _pattern = Chem.MolFromSmarts('[NH2]([H])([H])[a]')
+        for _match in _rdkitmol.GetSubstructMatches(_pattern):
+            n, h1, h2, ca = _match
+            sp2_aniline_impropers.append((n, ca, h1, h2))
+
+    if len(torsionrestraints)!=0 or sp2_aniline_impropers:
         temp.write(" 'constraints' : {\n 'set' : [\n")
         geometric_list = []
         for res in torsionrestraints:
@@ -187,6 +199,10 @@ def CreatePsi4OPTInputFile(poltype,comfilecoords,comfilename,mol,modred,bondangl
             _str = "{'type'    : 'dihedral', 'indices' : [ %d , %d , %d , %d ], "%tuple([_-1 for _ in res[0:4]]) \
                + "'value' : %.4f } \n"%(angle)
             geometric_list.append(_str)
+        for n, ca, h1, h2 in sp2_aniline_impropers:
+            geometric_list.append(
+                "{'type' : 'dihedral', 'indices' : [ %d , %d , %d , %d ], 'value' : 0.0 } \n"
+                % (n, ca, h1, h2))
         temp.write("       " + "     , ".join(geometric_list) + "    ]\n  }\n")
     temp.write("}"+'\n')
 

@@ -66,7 +66,6 @@
 [$([CX4]([O])[O])]                                                   45    37       C3O2 #                 C3O2, sp3 carbon with 2 oxygens
 [$([CX4r])]                                                          46    38        C3R #                  C3R, sp3 carbon on the cycle
 [$([CX4r5])]                                                         47    39       C3R5 #                 C3R5, sp3 carbon on 5-membered cycle
-[$([CX3R5])]                                                         48    40       C2R5 #                 C2R5, sp2 carbon on cycle
 [$([CX4r5]([Or5]))]                                                  49    41     C3O1R5 #               C3O1R5, sp3 carbon on 5-membered cycle bonded to 1 O on cycle
 [$([CX4r5]([Or5])[Or5])]                                             50    42     C3O2R5 #               C3O2R5, sp3 carbon on 5-membered cycle bonded to 2 O on cycle
 [$([CX4r6])]                                                         51    43       C3R6 #                 C3R6, sp3 carbon on 6-membered cycle
@@ -93,6 +92,7 @@
 [$([CX4]([Br])([Br])[Br])]                                           72    64       CBr3 #                 CBr3, sp3 carbon with 3 Br
 [$([CX4]([Br])([Br])([Br])[Br])]                                     73    65       CBr4 #                 CBr4, sp3 carbon with 4 Br
 [$([CX3]=[CX3])]                                      74    66        C2C #                  C2C, sp2 carbon, CH2=CH2 
+[$([CX3;R]=[CX3;R])]                                  48    40       C2R5 #                 C2R5, sp2 carbon, C=C in non-aromatic ring (endocyclic)
 [$([#6](=[#6])-[#6]=[#6])]                            75    67      C2C2C #                C2C2C, sp2 carbon, interior C of CH2=CH-CH=CH2
 [$([#6](=[#6])-[#6]=[#8])]                            76    68      C2C2O #                C2C2O, sp2 carbon, interior C of CH2=CH-C=O
 [$([CX3H1](=O))]                                                     77    69        CHO #                  C=O, sp2 carbon, aldehyde
