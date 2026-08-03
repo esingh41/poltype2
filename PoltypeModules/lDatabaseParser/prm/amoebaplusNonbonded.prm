@@ -8,7 +8,7 @@ CHGPEN  CH2=O          6.00000   3.05415
 CHGPEN  C=C            6.00000   3.09805 
 CHGPEN  CtbC            6.00000   3.67084  
 CHGPEN  CtbN            6.00000   3.67084  
-CHGPEN  Car            6.00000   3.67084  
+CHGPEN  Car            6.00000   3.36282  
 CHGPEN  Car2           6.00000   3.67084  
 CHGPEN  CarC=O         6.00000   3.67084  
 CHGPEN  CarNHx         6.00000   3.40592  
@@ -66,7 +66,7 @@ CHGPEN  H1CtbC          1.00000   3.28790
 CHGPEN  H1CtbN          1.00000   3.28790  
 CHGPEN  HC=O           1.00000   3.42000  
 CHGPEN  H2C=O          1.00000   3.42000  
-CHGPEN  Har            1.00000   3.55969  
+CHGPEN  Har            1.00000   3.55580  
 CHGPEN  HxN-Amide      1.00000   2.92056  
 CHGPEN  HNCar          1.00000   3.12512  
 CHGPEN  HO-C=O         1.00000   3.03196  
@@ -335,7 +335,7 @@ CHGTRN  I-CH2I         13.48314   2.24540
 CHGTRN  I-CHI2         13.24369   2.24540
 CHGTRN  I-CI3          13.20000   2.24540
 VDW     CH4            4.08632   0.08749  
-VDW     CH3            3.99216   0.08749  
+VDW     CH3            3.99216   0.08749
 VDW     CH2            3.77841   0.08749  
 VDW     CH1            3.55199   0.08749  
 VDW     CH0            3.47147   0.08749  
@@ -344,7 +344,7 @@ VDW     CH2=O          4.35966   0.07528
 VDW     C=C            4.52789   0.08023  
 VDW     CtbC           4.04119   0.08023  
 VDW     CtbN           4.04119   0.08023  
-VDW     Car            4.04119   0.08023  
+VDW     Car            4.04211   0.06532  
 VDW     Car2           4.04119   0.08023  
 VDW     CarC=O         4.22461   0.08023  
 VDW     CarNHx         3.90411   0.06817  
@@ -402,7 +402,7 @@ VDW     H1CtbC         3.21502   0.01900  0.98000
 VDW     H1CtbN         3.21502   0.01900  0.98000
 VDW     HC=O           3.33000   0.01000  0.98000
 VDW     H2C=O          3.33000   0.01000  0.98000
-VDW     Har            3.20000   0.01000  0.98000
+VDW     Har            3.15553   0.02811  0.98000
 VDW     HxN-Amide      2.73402   0.01803  0.98000
 VDW     HNCar          2.66234   0.01441  0.98000
 VDW     H-Nar          2.93454   0.01440  0.98000
@@ -433,7 +433,7 @@ VDW     O(C)C=O        3.59335   0.08778
 VDW     O=C(O)H        3.77866   0.08574  
 VDW     O=C(O)C        3.82390   0.08570 
 VDW     O-NO2          3.77866   0.08574  
-VDW     O=S            3.82369   0.10429  
+VDW     O=S            3.93175   0.10918
 VDW     O-P            3.82369   0.10429  
 VDW     O=P            3.82369   0.10429  
 VDW     OarH0r5        3.68940   0.09040  
@@ -474,7 +474,7 @@ VDW     SHC            4.63890   0.19710
 VDW     SHc            4.69672   0.19710  
 VDW     SC             4.57759   0.23630  
 VDW     SSC            4.57632   0.23630  
-VDW     S=O            4.57632   0.23630  
+VDW     S=O            4.66532   0.24572
 VDW     S(=O)2         4.57632   0.23630  
 VDW     SarH0r5        4.72981   0.21121  
 VDW     PO4            4.52500   0.18159  
@@ -487,10 +487,10 @@ VDW     F-CHF2         3.57558   0.04841
 VDW     F-CF3          3.60428   0.04841  
 VDW     Cl-SX4         4.52499   0.11310  
 VDW     Cl-Car         4.52499   0.11310  
-VDW     Cl-CH3         4.14389   0.24013 
-VDW     Cl-CH2Cl       4.14389   0.24013 
-VDW     Cl-CHCl2       4.14389   0.24013 
-VDW     Cl-CCl3        4.14389   0.24013  
+VDW     Cl-CH3         4.46420   0.11520
+VDW     Cl-CH2Cl       4.44360   0.13297
+VDW     Cl-CHCl2       4.48872   0.13673
+VDW     Cl-CCl3        4.55512   0.11656
 VDW     Br-Car         4.45251   0.22360  
 VDW     Br-CH3         4.51474   0.22362  
 VDW     Br-CH2Br       4.58570   0.22362  
@@ -502,6 +502,10 @@ VDW     I-CH3          4.95216   0.28649
 VDW     I-CH2I         5.00348   0.27462
 VDW     I-CHI2         5.19323   0.16453
 VDW     I-CI3          5.17365   0.18012
-###VDWPAIR
-#Cl4 ... H
-#vdwpair   805    2   3.86146   0.07529
+VDWPAIR   Cl-CH3       2   3.80003   0.09586
+VDWPAIR   Cl-CH2Cl     2   3.87532   0.07853
+VDWPAIR   Cl-CHCl2     2   3.90305   0.07987
+VDWPAIR   Cl-CCl3      2   3.86486   0.07261
+VDWPAIR   I-CH3        2   4.30680   0.11656
+VDWPAIR   I-CH2I       2   4.24953   0.10842
+VDWPAIR   Cl-Car       2   3.76072   0.10765
