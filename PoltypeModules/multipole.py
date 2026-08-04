@@ -558,7 +558,19 @@ def gen_peditinfile(poltype,mol):
               frames.append(f'{f5+1} {p+1}')
               frames.append(f'{f6+1} {p+1}')
 
-            # general case N with one H 
+            # hydrazine/hydrazone type N: N-N(H)-C (non-aromatic)
+            # poledit.x assigns a Z-then-Bisector frame to this N. For a planar
+            # (sp2) N the bisector of the remaining C and H is nearly
+            # anti-parallel to the N-N Z axis, so the X axis is ill-defined and
+            # the frame can blow up during MD. Use Z-then-X instead.
+            pattern = Chem.MolFromSmarts('[#7X3H1;!a]([#1])([#7])[#6]')
+            matches = rdkitmol.GetSubstructMatches(pattern)
+            for match in matches:
+              n,h,n2,c = match
+              # z-then-x: z along N-N, x toward C
+              frames.append(f'{n+1} {n2+1} {c+1}')
+
+            # general case N with one H
             pattern = Chem.MolFromSmarts('[H][#7X3H1]([*])[*]')
             matches = rdkitmol.GetSubstructMatches(pattern)
             for match in matches:
