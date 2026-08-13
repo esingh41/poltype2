@@ -290,8 +290,10 @@ Maximum geometry-optimization steps. Default: `400`.
 #### `gausoptcoords`
 Gaussian-style coordinate keyword inserted into the optimization route line (e.g. `cartesian`). Default: empty.
 
-#### `pyscf_opt_met`
-Intended PySCF optimization functional. **Caveat:** the ini reader assigns to `self.pyscf_opt_met` (no `h`), but downstream `pyscf_setup.py` reads `self.pyscf_opt_meth` (with `h`, which is the dataclass field). The ini keyword therefore does not propagate — the dataclass default is what gets used. Default: `wb97x_d3`.
+#### `pyscf_opt_meth`
+Exchange-correlation functional used by the PySCF optimizer (written into the generated PySCF input as the `xc` argument). Default: `wb97x-d3bj`.
+
+The default requires PySCF's dispersion support (`pyscf-dispersion` plus `dftd3`; see [README_INSTALL](README/README_INSTALL.MD)). The older default `wb97x_d3` only resolves on **pyscf <= 2.7.0**, where the underscore spelling slipped past the dispersion blacklist and mapped to libxc `HYB_GGA_XC_WB97X_D3` (XC part only, no additive D3 term). pyscf 2.8+ rejects both spellings, so use `wb97x-d3bj` (wB97X-V XC + D3BJ) there. The two are different functionals — energies and optimized geometries will not match pre-2.8 `wb97x_d3` results.
 
 #### `pyscf_sol_imp`
 PySCF implicit-solvent model: `IEF-PCM`, `C-PCM`, `SS(V)PE`, or `COSMO`. Default: `IEF-PCM`.

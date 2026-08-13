@@ -255,7 +255,7 @@ class PolarizableTyper():
         espbasisset:str="aug-cc-pVTZ"
         torspbasisset:str="6-311+G*"
         optmethod:str='MP2'
-        pyscf_opt_meth:str = 'wb97x_d3'
+        pyscf_opt_meth:str = 'wb97x-d3bj'
         pyscf_sol_imp:str = 'IEF-PCM' # C-PCM, SS(V)PE, COSMO
         pyscf_sol_eps:float = 78.3553 # Water
         toroptmethod:str='xtb'
@@ -717,8 +717,8 @@ class PolarizableTyper():
                                     warnings.warn(f"Could not locate prmmod file '{fpath1}'")
                         elif newline.startswith("optmethod"):
                             self.optmethod = a
-                        elif newline.startswith("pyscf_opt_met"):
-                            self.pyscf_opt_met = a
+                        elif newline.startswith("pyscf_opt_meth"):
+                            self.pyscf_opt_meth = a
                         elif newline.startswith("pyscf_sol_imp"):
                             self.pyscf_sol_imp = a
                         elif newline.startswith("pyscf_sol_eps"):

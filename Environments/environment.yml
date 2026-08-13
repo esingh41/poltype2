@@ -250,3 +250,8 @@ dependencies:
     - bidict==0.22.0
     - pyastronomy==0.17.1
     - quantities==0.13.0
+    # PySCF QM backend; dftd3 + pyscf-dispersion are required by the
+    # default optimization functional (pyscf_opt_meth=wb97x-d3bj)
+    - pyscf>=2.7.0
+    - dftd3
+    - pyscf-dispersion
