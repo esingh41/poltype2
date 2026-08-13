@@ -71,17 +71,18 @@ CHGPEN  HxN-Amide      1.00000   2.92056
 CHGPEN  HNCar          1.00000   3.12512  
 CHGPEN  HO-C=O         1.00000   3.03196  
 CHGPEN  HO-CH1=O       1.00000   3.03196  
-CHGPEN  H3N            1.00000   2.97299  
+CHGPEN  H3N            1.00000   2.84081
 CHGPEN  H-Nar          1.00000   3.12512  
-CHGPEN  H2NCH3         1.00000   3.12824  
+CHGPEN  H2NCH3         1.00000   3.07840
 CHGPEN  H2NNH2         1.00000   3.12824  
 CHGPEN  H2N            1.00000   3.12824  
 CHGPEN  H1N            1.00000   3.24892  
-CHGPEN  HS             1.00000   3.21322  
+CHGPEN  HS             1.00000   3.17793
+CHGPEN  H2S            1.00000   3.21320
 CHGPEN  HSc            1.00000   3.21322  
 CHGPEN  HOCar          1.00000   3.01100  
 CHGPEN  n-HOC          1.00000   3.17080  
-CHGPEN  i-HOC          1.00000   3.17080  
+CHGPEN  i-HOC          1.00000   3.16313
 CHGPEN  t-HOC          1.00000   3.17080  
 CHGPEN  OW             8.00000   4.00470  
 CHGPEN  OHCH3          8.00000   4.23553  
@@ -113,7 +114,7 @@ CHGPEN  O(C)C          8.00000   3.81564
 CHGPEN  O(CH2)Me       8.00000   3.89621  
 CHGPEN  O(Car)C        8.00000   4.00000  
 CHGPEN  n-OHC          8.00000   4.25687  
-CHGPEN  i-OHC          8.00000   4.25687  
+CHGPEN  i-OHC          8.00000   4.24657
 CHGPEN  NH2-Amide      7.00000   4.61781  
 CHGPEN  NH1-Amide      7.00000   4.61781  
 CHGPEN  NH0-Amide      7.00000   4.61781  
@@ -124,8 +125,8 @@ CHGPEN  NarH1          7.00000   4.53596
 CHGPEN  NarH0r5        7.00000   4.53596  
 CHGPEN  NarH0r5-Cx4    7.00000   4.53596  
 CHGPEN  NarH0r6        7.00000   3.38865  
-CHGPEN  NH3            7.00000   3.98063  
-CHGPEN  NH2CH3         7.00000   3.47031  
+CHGPEN  NH3            7.00000   3.83152
+CHGPEN  NH2CH3         7.00000   3.40516
 CHGPEN  NH2NH2         7.00000   3.47031  
 CHGPEN  NH2            7.00000   3.36180  
 CHGPEN  NH1            7.00000   3.32000  
@@ -134,9 +135,9 @@ CHGPEN  NH0            7.00000   3.32000
 CHGPEN  NO2            7.00000   4.53596  
 CHGPEN  NtbC           7.00000   4.53596  
 CHGPEN  SH2            16.00000  3.06510  
-CHGPEN  SHC            16.00000  3.06426  
+CHGPEN  SHC            16.00000  3.12263
 CHGPEN  SHc            16.00000  3.06426  
-CHGPEN  SC             16.00000  3.04660  
+CHGPEN  SC             16.00000  3.01409
 CHGPEN  SSC            16.00000  3.04660  
 CHGPEN  S=O            16.00000  3.04660  
 CHGPEN  S(=O)2         16.00000  3.04660  
@@ -246,6 +247,7 @@ CHGTRN  H2NNH2         9.90461   4.79477
 CHGTRN  H2N            9.90461   4.79477  
 CHGTRN  H1N            9.90647   4.79365  
 CHGTRN  HS             9.87349   4.19551  
+CHGTRN  H2S            9.87349   4.19551
 CHGTRN  HSc            9.87349   4.19551  
 CHGTRN  HOCar          7.93600   4.41900  
 CHGTRN  n-HOC          9.61979   4.45392  
@@ -408,16 +410,17 @@ VDW     HNCar          2.66234   0.01441  0.98000
 VDW     H-Nar          2.93454   0.01440  0.98000
 VDW     HO-C=O         2.92920   0.01000  0.90000
 VDW     HO-CH1=O       2.88486   0.01000  0.90000
-VDW     H3N            2.71755   0.01570  0.98000
-VDW     H2NCH3         2.64499   0.02169  0.98000
+VDW     H3N            2.64761   0.01387  0.98000
+VDW     H2NCH3         2.59218   0.01747  0.98000
 VDW     H2NNH2         2.64499   0.02169  0.98000
 VDW     H2N            2.72645   0.02900  0.98000
 VDW     H1N            2.64095   0.02647  0.98000
-VDW     HS             3.33556   0.01050  0.98000
+VDW     HS             3.27834   0.01080  0.98000
+VDW     H2S            3.23260   0.01000  0.98000
 VDW     HSc            3.22009   0.01050  0.98000
 VDW     HOCar          2.70750   0.01000  0.98000
 VDW     n-HOC          2.86844   0.01000  0.98000
-VDW     i-HOC          2.76859   0.01000  0.98000
+VDW     i-HOC          2.76214   0.01000  0.98000
 VDW     t-HOC          2.90772   0.01000  0.98000
 VDW     OW             3.81153   0.08286  
 VDW     OHCH3          3.68190   0.11414  
@@ -449,7 +452,7 @@ VDW     O(C)C          3.88011   0.09360
 VDW     O(CH2)Me       3.88011   0.08036  
 VDW     O(Car)C        3.88011   0.08137  
 VDW     n-OHC          3.84073   0.08425  
-VDW     i-OHC          3.89634   0.08598  
+VDW     i-OHC          3.87126   0.08556
 VDW     NH2-Amide      4.33500   0.11647  
 VDW     NH1-Amide      4.33500   0.11647  
 VDW     NH0-Amide      4.33500   0.11647  
@@ -460,8 +463,8 @@ VDW     NarH1          4.40120   0.12719
 VDW     NarH0r5        3.78606   0.12719  
 VDW     NarH0r5-Cx4    3.40000   0.12719  
 VDW     NarH0r6        4.07157   0.12719  
-VDW     NH3            4.22294   0.10035  
-VDW     NH2CH3         4.19037   0.10647  
+VDW     NH3            4.29040   0.11223
+VDW     NH2CH3         4.22930   0.11735
 VDW     NH2NH2         4.19037   0.10647  
 VDW     NH2            4.19037   0.11647  
 VDW     NH1            4.19037   0.11491  
@@ -470,9 +473,9 @@ VDW     NH0            4.19037   0.09141
 VDW     NO2            4.13951   0.12719  
 VDW     NtbC           4.13574   0.12719  
 VDW     SH2            4.84687   0.15162  
-VDW     SHC            4.63890   0.19710  
+VDW     SHC            4.60553   0.19719
 VDW     SHc            4.69672   0.19710  
-VDW     SC             4.57759   0.23630  
+VDW     SC             4.61716   0.24097
 VDW     SSC            4.57632   0.23630  
 VDW     S=O            4.66532   0.24572
 VDW     S(=O)2         4.57632   0.23630  
@@ -502,10 +505,14 @@ VDW     I-CH3          4.95216   0.28649
 VDW     I-CH2I         5.00348   0.27462
 VDW     I-CHI2         5.19323   0.16453
 VDW     I-CI3          5.17365   0.18012
-VDWPAIR   Cl-CH3       2   3.80003   0.09586
-VDWPAIR   Cl-CH2Cl     2   3.87532   0.07853
-VDWPAIR   Cl-CHCl2     2   3.90305   0.07987
-VDWPAIR   Cl-CCl3      2   3.86486   0.07261
-VDWPAIR   I-CH3        2   4.30680   0.11656
-VDWPAIR   I-CH2I       2   4.24953   0.10842
-VDWPAIR   Cl-Car       2   3.76072   0.10765
+VDWPAIR   Cl-CH3       2   3.80003   0.09586  # MeCl   Cl--waterH  HFE -0.56 vs expt -0.55
+VDWPAIR   Cl-CH2Cl     2   3.87532   0.07853  # CH2Cl2 Cl--waterH  HFE -1.23 vs expt -1.31
+VDWPAIR   Cl-CHCl2     2   3.90305   0.07987  # CHCl3  Cl--waterH  HFE -1.06 vs expt -1.08
+VDWPAIR   Cl-CCl3      2   3.86486   0.07261  # CCl4   Cl--waterH  HFE +0.05 vs expt +0.08
+VDWPAIR   Br-CH3       2   3.92140   0.06791  # MeBr   Br--waterH  HFE -0.83 vs expt -0.82
+VDWPAIR   Br-CH2Br     2   3.80107   0.05563  # CH2Br2 Br--waterH  HFE -1.96 vs expt -1.96
+VDWPAIR   Br-CHBr2     2   3.73204   0.05658  # CHBr3  Br--waterH  HFE -2.09 vs expt -2.13
+VDWPAIR   I-CH3        2   4.30680   0.11656  # MeI    I--waterH   HFE -0.94 vs expt -0.89
+VDWPAIR   I-CH2I       2   4.24953   0.10842  # CH2I2  I--waterH   HFE -2.42 vs expt -2.49
+VDWPAIR   Cl-Car       2   3.76072   0.10765  # BenCl  Cl--waterH  HFE -1.16 vs expt -1.12; class shared with chlorophenols/anilines, validated on BenCl only
+VDWPAIR   Br-Car       2   3.69694   0.09432  # BenBr  Br--waterH  HFE -1.41 vs expt -1.46; needs the Car/Har chgpen+vdw update; class shared with BenBr2/BrToluene, validated on BenBr only
