@@ -783,8 +783,9 @@ def GeometryOptimization(poltype,mol,totcharge,suffix='1',loose=False,checkbonds
                 importlib.import_module('pyscf')
                 poltype.WriteToLog("PySCF is installed.\n")
             except ImportError:
-                poltype.WriteToLog("PySCF is not installed.\n Make sure that pyscf version 2.7.0 is installed along with dft3, dft4 and pyscf-dispersion.\n You can install using: \n        `pip install pyscf==2.7.0 dft3 dft4 pyscf-dispersion`")
-                raise ImportError("PySCF is not installed.\n Make sure that pyscf version 2.7.0 is installed along with dft3, dft4 and pyscf-dispersion.\n You can install using: \n        `pip install pyscf==2.7.0 dft3 dft4 pyscf-dispersion`")
+                msg = "PySCF is not installed.\n Make sure that pyscf (2.7.0 or newer) is installed along with pyscf-dispersion, which supplies the D3BJ correction used by the default functional (pyscf_opt_meth=wb97x-d3bj).\n You can install using: \n        `pip install \"pyscf>=2.7.0\" pyscf-dispersion`"
+                poltype.WriteToLog(msg)
+                raise ImportError(msg)
         
 
             gen_optcomfile(poltype,comoptfname,poltype.numproc,poltype.maxmem,poltype.maxdisk,chkoptfname,mol,modred,torsionrestraints)

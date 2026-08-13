@@ -5,7 +5,7 @@
 * Tinker, version >=8.9.4
 * GDMA, version 2.3 and greater
 * PSI4 (or Gaussian 09/16)
-* PySCF, version >=2.7.0, together with `pyscf-dispersion` and `dftd3` (installed with the conda environment below; needed unless `dont_use_pyscf` is set — see [PySCF version and the optimization functional](#pyscf-version-and-the-optimization-functional))
+* PySCF, version >=2.7.0, together with `pyscf-dispersion` (installed with the conda environment below; needed unless `dont_use_pyscf` is set — see [PySCF version and the optimization functional](#pyscf-version-and-the-optimization-functional))
 
 
 ### Required Tinker CPU Installation
@@ -100,8 +100,9 @@ dependencies:
 
 ### PySCF version and the optimization functional
 * The PySCF backend (used unless `dont_use_pyscf` is set) runs DFT geometry optimizations with the functional given by the `pyscf_opt_meth` keyword in `poltype.ini`; the default is now `wb97x-d3bj`.
-* `dftd3` and `pyscf-dispersion` are **required** for that default — they supply the D3BJ correction that PySCF adds on top of the wB97X-V exchange-correlation part.
-* The previous default, `wb97x_d3`, only works on **pyscf <= 2.7.0**. There the underscore spelling slipped past PySCF's dispersion blacklist and resolved to libxc `HYB_GGA_XC_WB97X_D3` (XC part only, with no additive D3 term). pyscf 2.8+ blacklists both spellings and raises an error.
+* `pyscf-dispersion` is **required** for that default — it supplies the D3BJ correction that PySCF adds on top of the wB97X-V exchange-correlation part. Without it PySCF stops with `RuntimeError: dftd3 not available`. (The standalone `dftd3`/`dftd4` pip packages are not what PySCF calls here; `pyscf-dispersion` ships its own libraries.)
+* `wb97x-d3bj` resolves the same way on pyscf 2.7.0, 2.8.0 and 2.14.0 (checked; identical energies), so the version can be moved forward freely.
+* The previous default, `wb97x_d3`, only works on **pyscf <= 2.7.0**. There the underscore spelling slipped past PySCF's dispersion blacklist and resolved to libxc `HYB_GGA_XC_WB97X_D3` (XC part only, with no additive D3 term). pyscf 2.8+ raises `NotImplementedError: wb97x_d3 is not supported yet.` for both spellings.
 * If you must reproduce results generated with the old default, pin `pyscf==2.7.0` and set `pyscf_opt_meth=wb97x_d3` in `poltype.ini`. `wb97x-d3bj` is a different functional, so energies and optimized geometries will not match pre-2.8 `wb97x_d3` output.
 
 ### Install fennol
