@@ -558,6 +558,40 @@ def gen_peditinfile(poltype,mol):
               frames.append(f'{f5+1} {p+1}')
               frames.append(f'{f6+1} {p+1}')
 
+            # hydrazine/hydrazone type N: N-N(H)-C (non-aromatic)
+            # poledit.x assigns a Z-then-Bisector frame to this N. For a planar
+            # (sp2) N the bisector of the remaining C and H is nearly
+            # anti-parallel to the N-N Z axis, so the X axis is ill-defined and
+            # the frame can blow up during MD. Use Z-then-X instead.
+            pattern = Chem.MolFromSmarts('[#7X3H1;!a]([#1])([#7])[#6]')
+            matches = rdkitmol.GetSubstructMatches(pattern)
+            for match in matches:
+              n,h,n2,c = match
+              # z-then-x: z along N-N, x toward C
+              frames.append(f'{n+1} {n2+1} {c+1}')
+
+            # H on a hydrazine-type NH2 (N-NH2), e.g. NH2NH2
+            # poledit.x gives these H a Z-then-Bisector frame bisecting the far
+            # N and the other H on the same N. That X axis sits only ~23 deg off
+            # the Z axis and depends on the position of the other H, which is
+            # the coordinate that moves on rotation about N-N. Use Z-then-X with
+            # X toward the far N instead (~42 deg, and identical for both H).
+            # The far N is 1-3, which kmpole resolves via its 1-3 pass -- same
+            # topology as the AMOEBA water H frame.
+            pattern = Chem.MolFromSmarts('[#1][#7X3H2][#7]')
+            matches = rdkitmol.GetSubstructMatches(pattern)
+            for match in matches:
+              h,n,n2 = match
+              frames.append(f'{h+1} {n+1} {n2+1}')
+
+            # general case N with one H
+            pattern = Chem.MolFromSmarts('[H][#7X3H1]([*])[*]')
+            matches = rdkitmol.GetSubstructMatches(pattern)
+            for match in matches:
+              h,n,x1,x2 = match
+              frames.append(f'{h+1} {n+1} {x1+1}')
+
+
             if frames != []:
               for frame in frames:
                 f.write(f'{frame}\n')

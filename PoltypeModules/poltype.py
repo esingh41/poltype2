@@ -232,7 +232,7 @@ class PolarizableTyper():
         scaleandfixdipole:bool=False
         scalebigmultipole:bool=False
         fragbigmultipole:bool=True
-        sp2aniline:bool=False
+        sp2aniline:bool=True
         nonplanarphenol:bool=False
         chargethreshold:float=1.5
         dipolethreshold:float=1.5
@@ -255,7 +255,7 @@ class PolarizableTyper():
         espbasisset:str="aug-cc-pVTZ"
         torspbasisset:str="6-311+G*"
         optmethod:str='MP2'
-        pyscf_opt_meth:str = 'wb97x_d3'
+        pyscf_opt_meth:str = 'wb97x-d3bj'
         pyscf_sol_imp:str = 'IEF-PCM' # C-PCM, SS(V)PE, COSMO
         pyscf_sol_eps:float = 78.3553 # Water
         toroptmethod:str='xtb'
@@ -285,6 +285,7 @@ class PolarizableTyper():
         use_gaus:bool=False
         use_gausoptonly:bool=False
         use_psi4_geometric_opt:bool=True
+        dont_use_pyscf:bool=False
         freq:bool=False
         postfit:bool=False
         bashrcpath:None=None
@@ -626,6 +627,8 @@ class PolarizableTyper():
                             self.use_gausoptonly=self.SetDefaultBool(line,a,True)
                         elif "use_psi4_geometric_opt" in newline:
                             self.use_psi4_geometric_opt=self.SetDefaultBool(line,a,True)
+                        elif "dont_use_pyscf" in newline:
+                            self.dont_use_pyscf=self.SetDefaultBool(line,a,True)
                         elif "dontdotor" in newline:
                             self.dontdotor=self.SetDefaultBool(line,a,True)
                         elif "dovdwscan" in newline:
@@ -714,8 +717,8 @@ class PolarizableTyper():
                                     warnings.warn(f"Could not locate prmmod file '{fpath1}'")
                         elif newline.startswith("optmethod"):
                             self.optmethod = a
-                        elif newline.startswith("pyscf_opt_met"):
-                            self.pyscf_opt_met = a
+                        elif newline.startswith("pyscf_opt_meth"):
+                            self.pyscf_opt_meth = a
                         elif newline.startswith("pyscf_sol_imp"):
                             self.pyscf_sol_imp = a
                         elif newline.startswith("pyscf_sol_eps"):
@@ -2618,12 +2621,13 @@ class PolarizableTyper():
             pythonpath=os.path.join(xtbenvpath,'bin')
             xtbpath=os.path.join(pythonpath,'xtb')
             nonplanarphenol = self.nonplanarphenol
+            sp2aniline = self.sp2aniline
+            script = os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'lConformerGenerator.py')
+            cmdstr = f"python \"{script}\" -i {self.molstructfname} -p {xtbpath} -sp2aniline {sp2aniline}"
             if nonplanarphenol:
-              cmdstr = f"python \"{os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'lConformerGenerator.py')}\" -i {self.molstructfname} -p {xtbpath} --npp"
-            else:
-              cmdstr = f"python \"{os.path.join(os.path.abspath(os.path.split(__file__)[0]), 'lConformerGenerator.py')}\" -i {self.molstructfname} -p {xtbpath}"
-              
-            self.WriteToLog('Calling: '+cmdstr) 
+              cmdstr += " --npp"
+
+            self.WriteToLog('Calling: '+cmdstr)
             os.system(cmdstr)
             name = "conftest.mol" 
             indextocoordslist=[]
@@ -3323,9 +3327,11 @@ class PolarizableTyper():
             if not os.path.isfile(self.key4fname) or not os.path.isfile(self.torsionsmissingfilename) or not os.path.isfile(self.torsionprmguessfilename):
                 self.WriteToLog('Searching Database')
                 torsionprmstotransferinfo,torsionsmissing,classkeytotorsionparametersguess,tortorprmstotransferinfo,tortorsmissing=torsiondatabaseparser.GrabSmallMoleculeAMOEBAParameters(self,optmol,mol,m)
+                self.WriteToLog('Torsions missing after database search: '+str(torsionsmissing))
             if os.path.isfile(self.torsionsmissingfilename):
                 # Read missing torsions
                 torsionsmissing=torsiondatabaseparser.ReadTorsionList(self,self.torsionsmissingfilename)
+                self.WriteToLog('Torsions missing read from '+self.torsionsmissingfilename+': '+str(torsionsmissing))
             if os.path.isfile(self.torsionprmguessfilename):
                 classkeytotorsionparametersguess=torsiondatabaseparser.ReadDictionaryFromFile(self,self.torsionprmguessfilename)
             if os.path.isfile(self.vdwmissingfilename):
@@ -3430,7 +3436,6 @@ class PolarizableTyper():
                       self.WriteToLog('Assign Van der Waals and GK parameters using DatabaseParser')
                     ldatabaseparser.assign_nonbonded_params(self) 
                     torsiondatabaseparser.StiffenZThenBisectorAngleConstants(self,self.key4fname)
-                    torsiondatabaseparser.TestBondAngleEquilValues(self)
                 self.AddIndicesToKey(self.key4fname)
                 if self.databasematchonly==True:
                     sys.exit()
@@ -3517,6 +3522,7 @@ class PolarizableTyper():
                 if tor not in matched_torlist:
                   tmp.append(tor)
               torsionsmissing = tmp
+              self.WriteToLog('Torsions missing after removing ring-matched torsions: '+str(torsionsmissing))
               with open(self.torsionsmissingfilename, 'w') as f:
                for torsionmiss in torsionsmissing:
                 f.write(str(torsionmiss) + '\n')
@@ -3540,9 +3546,15 @@ class PolarizableTyper():
                       f.write(keyline)
                   else:
                     f.write(keyline)
+            
+            # bond/angle adjustment based on MM-opted geometry
+            torsiondatabaseparser.TestBondAngleEquilValues(self)
+
             # STEP 41
+            self.WriteToLog('Torsions missing passed to get_torlist: '+str(torsionsmissing))
             (torlist, self.rotbndlist,nonaroringtorlist,self.nonrotbndlist) = torgen.get_torlist(self,optmol,torsionsmissing,self.onlyrotbndslist)
             torlist,self.rotbndlist=torgen.RemoveDuplicateRotatableBondTypes(self,torlist) # this only happens in very symmetrical molecules
+            self.WriteToLog('Rotatable bonds selected for QM scan after get_torlist: '+str(torlist))
             
             # STEP 41-42
             # remove matched torsion indices from torlist
@@ -3563,6 +3575,16 @@ class PolarizableTyper():
               comb_r = '-'.join([t4,t3,t2,t1])
               if not ((comb in torsions_toadd.keys()) or (comb_r in torsions_toadd.keys())):
                 tmptorlist.append(tor)
+              else:
+                # Even if the representative torsion was matched, keep the bond if any
+                # torsion around this central bond still has zero (unfit) parameters.
+                has_zero_missing = any(
+                  (miss[1] == int(t2) and miss[2] == int(t3)) or
+                  (miss[1] == int(t3) and miss[2] == int(t2))
+                  for miss in torsionsmissing
+                )
+                if has_zero_missing:
+                  tmptorlist.append(tor)
             torlist = tmptorlist
             
             torlist=[tuple(i) for i in torlist]
@@ -3574,6 +3596,7 @@ class PolarizableTyper():
             nonaroringtorlist=[tuple([i]) for i in nonaroringtorlist]
             self.rotbndtoanginc=torgen.DetermineAngleIncrementAndPointsNeededForEachTorsionSet(self,mol,self.rotbndlist)
             if self.dontdotor==True:
+                self.WriteToLog('dontdotor=True: clearing torlist, no QM torsion fitting will be performed')
                 torlist=[]
             
               
@@ -3654,6 +3677,7 @@ class PolarizableTyper():
                 # Torsion scanning then fitting. *.key_7 will contain updated torsions
                 if not os.path.isfile(self.key7fname):
                     if len(self.torlist)!=0:
+                        self.WriteToLog('Starting QM torsion scan and fit for torsions missing: '+str(torsionsmissing))
                         # torsion scanning
                         for r in range(len(self.toroptmethodlist)):
                             self.toroptmethod=self.toroptmethodlist[r]
@@ -3665,6 +3689,7 @@ class PolarizableTyper():
                             sys.exit()
                         torfit.process_rot_bond_tors(self,optmol)
                     else:
+                        self.WriteToLog('torlist is empty, skipping QM torsion scan/fit; torsions missing: '+str(torsionsmissing))
                         shutil.copy(self.key6fname,self.key7fname)           
            
 

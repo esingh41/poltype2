@@ -11,7 +11,13 @@ class PySCF_init_setup():
     torsion restraints and final output.
     
     !!!! WARNING !!!
-    You need to make sure that pyscf version is 2.7.0 to use wb97x-d3 !!
+    The 'wb97x_d3' functional only works on pyscf 2.7.0 and older, where the
+    underscore spelling slipped past the dispersion blacklist and resolved to
+    libxc HYB_GGA_XC_WB97X_D3 (XC part only, with no additive D3 term).
+    pyscf 2.8+ blacklists both spellings, so on those versions use a supported
+    name such as 'wb97x-d3bj' (wB97X-V XC + D3BJ). Set it via pyscf_opt_meth
+    in poltype.ini. Note that this is a different functional: energies and
+    optimized geometries will not match pre-2.8 wb97x_d3 results.
 
     Inputs:
         -   poltype_obj: poltype class object (class obj)

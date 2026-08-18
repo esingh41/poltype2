@@ -1,19 +1,21 @@
 # opbend parameters in amoebabio18.prm
 # only big ones are recorded
 # to replace QM-derived values (opbend.prm)
-[#6][#6](=O)[*]   			  49.60 	% 0,1	% C-->C=O 
-[#1][#6](=O)[*]  			 		140.30 	% 0,1	% H-->C=O 
-[#8]=[#6]([*])[*]  		    54.00 	% 0,1	% O-->C=O 
-[#7][#6](=O)[*]      	 		107.90 	% 0,1	% N-->C=O
-[#8][#6](=O)[*]      	 		107.90 	% 0,1	% O-->C=O
-[#1][#7]([*])[#6]=[O]      12.90 	% 0,1	% H-->N of amide
-[#6][#7][#6](=O)[*]       41.70 	% 0,1	% C-->N of amide
-[#6](=[O])[#7][*]        	70.50   % 0,2 % O=C-->N of amide
-[*;!#1][#6](=O)[O-]      121.60   % 0,1 % X--->COO-
-[O-][#6](=O)[*;!#1]      118.70   % 0,1 % OD--->COO- (OD = O-)
-[OH][#6](=O)[*;!#1]      133.10   % 0,1 % OH--->C=O 
+[#6][#6](=[O,S])[*]   			  49.60 	% 0,1	% C-->C=O/C=S
+[#1][#6](=[O,S])[*]  			 		140.30 	% 0,1	% H-->C=O/C=S
+[#8,#16]=[#6]([*])[*]  		    54.00 	% 0,1	% O/S-->C=O/C=S
+[#7][#6](=[O,S])[*]      	 		107.90 	% 0,1	% N-->C=O/C=S
+[#8][#6](=[O,S])[*]      	 		107.90 	% 0,1	% O-->C=O/C=S
+[#1][#7]([*])[#6]=[O,S]      12.90 	% 0,1	% H-->N of amide/thioamide
+[#6][#7][#6](=[O,S])[*]       41.70 	% 0,1	% C-->N of amide/thioamide
+[#6](=[O,S])[#7][*]        	70.50   % 0,2 % O=C-->N of amide/thioamide
+[*;!#1][#6](=[O,S])[O-]      121.60   % 0,1 % X--->COO-
+[O-][#6](=[O,S])[*;!#1]      118.70   % 0,1 % OD--->COO- (OD = O-)
+[OH][#6](=[O,S])[*;!#1]      133.10   % 0,1 % OH--->C=O/C=S
 [#6]~[CX3](=[NH2])[NH2]   150.0   % 0,1 % C-->C+
 [NH2]=[CX3]([NH2])[#6]    150.0   % 0,1 % N-->C+
 [CX3]=[NH2]([#1])[#1]      50.0   % 0,1 % C+-->NH2
 [#8][#5]([*])[*]           70.5   % 0,1 % O-->BX2
 [#1][#5]([#1])[*]          12.9   % 0,1 % H-->BH2
+[*]~[$([c,n;R2])]                 300.0   % 0,1   % X-->sp2 atom in fused ring (every opbend around ring-fusion aromatic C/N), k=300
+[$([c,n;R2])]~[$([c,n;R2])]       300.0   % 1,0   % fused-fused reverse direction (opbend center = the other ring-fusion atom; needed because assignOpbendA09 uses pybel findall, which dedups symmetric bonds)

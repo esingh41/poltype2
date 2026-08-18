@@ -179,7 +179,19 @@ def CreatePsi4OPTInputFile(poltype,comfilecoords,comfilename,mol,modred,bondangl
         temp.write(" 'convergence_set' : 'GAU_LOOSE',"+'\n')
         temp.write(" 'convergence_energy' : 1e-4,"+'\n')
 
-    if len(torsionrestraints)!=0:
+    # sp2 aniline: improper dihedral N-Ca-H1-H2 driven to 0 keeps NH2 planar.
+    # geomeTRIC 'dihedral' accepts any 4 atoms (no chain check); optking has no
+    # fixed_oofp so only the geomeTRIC path carries the constraint here.
+    # SMARTS / atom order mirror gen_optcomfile sp2aniline block (line 391).
+    sp2_aniline_impropers = []
+    if poltype.sp2aniline:
+        _rdkitmol = Chem.MolFromMolFile(poltype.molstructfname, removeHs=False)
+        _pattern = Chem.MolFromSmarts('[NH2]([H])([H])[a]')
+        for _match in _rdkitmol.GetSubstructMatches(_pattern):
+            n, h1, h2, ca = _match
+            sp2_aniline_impropers.append((n, ca, h1, h2))
+
+    if len(torsionrestraints)!=0 or sp2_aniline_impropers:
         temp.write(" 'constraints' : {\n 'set' : [\n")
         geometric_list = []
         for res in torsionrestraints:
@@ -187,6 +199,10 @@ def CreatePsi4OPTInputFile(poltype,comfilecoords,comfilename,mol,modred,bondangl
             _str = "{'type'    : 'dihedral', 'indices' : [ %d , %d , %d , %d ], "%tuple([_-1 for _ in res[0:4]]) \
                + "'value' : %.4f } \n"%(angle)
             geometric_list.append(_str)
+        for n, ca, h1, h2 in sp2_aniline_impropers:
+            geometric_list.append(
+                "{'type' : 'dihedral', 'indices' : [ %d , %d , %d , %d ], 'value' : 0.0 } \n"
+                % (n, ca, h1, h2))
         temp.write("       " + "     , ".join(geometric_list) + "    ]\n  }\n")
     temp.write("}"+'\n')
 
@@ -726,7 +742,7 @@ def GeometryOptimization(poltype,mol,totcharge,suffix='1',loose=False,checkbonds
           Soft = 'Psi4' 
         
         # Replace Psi4 with PySCF when pcm is needed
-        if (poltype.optpcm==True or (poltype.optpcm==-1 and poltype.pcm)) and (Soft == 'Psi4'):
+        if (poltype.optpcm==True or (poltype.optpcm==-1 and poltype.pcm)) and (Soft == 'Psi4') and (poltype.dont_use_pyscf==False):
           Soft = 'PySCF'
         
         if Soft == 'Gaussian': # try to use gaussian for opt
@@ -767,8 +783,9 @@ def GeometryOptimization(poltype,mol,totcharge,suffix='1',loose=False,checkbonds
                 importlib.import_module('pyscf')
                 poltype.WriteToLog("PySCF is installed.\n")
             except ImportError:
-                poltype.WriteToLog("PySCF is not installed.\n Make sure that pyscf version 2.7.0 is installed along with dft3, dft4 and pyscf-dispersion.\n You can install using: \n        `pip install pyscf==2.7.0 dft3 dft4 pyscf-dispersion`")
-                raise ImportError("PySCF is not installed.\n Make sure that pyscf version 2.7.0 is installed along with dft3, dft4 and pyscf-dispersion.\n You can install using: \n        `pip install pyscf==2.7.0 dft3 dft4 pyscf-dispersion`")
+                msg = "PySCF is not installed.\n Make sure that pyscf (2.7.0 or newer) is installed along with pyscf-dispersion, which supplies the D3BJ correction used by the default functional (pyscf_opt_meth=wb97x-d3bj).\n You can install using: \n        `pip install \"pyscf>=2.7.0\" pyscf-dispersion`"
+                poltype.WriteToLog(msg)
+                raise ImportError(msg)
         
 
             gen_optcomfile(poltype,comoptfname,poltype.numproc,poltype.maxmem,poltype.maxdisk,chkoptfname,mol,modred,torsionrestraints)

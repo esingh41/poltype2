@@ -264,6 +264,8 @@ def modkey2_fragmpole(poltype):
           pt.write("sameleveldmaesp=True\n")
           pt.write("scalebigmultipole=True\n")
           pt.write("fragbigmultipole=False\n")
+          pt.write(f"dont_use_pyscf={poltype.dont_use_pyscf}\n")
+          pt.write(f"pcm_auto={poltype.pcm_auto}\n")
           pt.write(f"numproc={poltype.numproc}\n")
           pt.write(f"maxmem={poltype.maxmem}\n")
           pt.write(f"maxdisk={poltype.maxdisk}\n")

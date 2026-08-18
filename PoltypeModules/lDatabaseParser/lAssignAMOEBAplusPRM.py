@@ -558,6 +558,7 @@ def assignNonbondedAMOEBAplus():
   chgtrn_params = {}
   chgpen_params = {}
   vdw_params = {}
+  vdwpair_params = {}
 
   #The mapping from smart strings to atom types to charge penetration parameters
   #Creates a dict where the smarts are the keys and then the values are the parameter strings
@@ -591,15 +592,32 @@ def assignNonbondedAMOEBAplus():
         print("Warning: there are two sets of vdw parameters in the database")
         print(f"One is {prm_str}, and the other is {vdw_params[smt_type]}")
 
+    # vdw pair overrides (e.g. halogen--water-H); unlike CP/CT/VDW these exist
+    # for a handful of types only, so a missing entry is normal, not an error.
+    # The trailing "# molecule calc expt dev" comment is stripped from the
+    # parameter string and re-emitted as a comment above the key line.
+    if (len(dd) > 0) and ("VDWPAIR" == dd[0].upper()):
+      smt_type = dd[1]
+      prm_str = '  '.join(line.split('#')[0].split()[2:])
+      comment = line.split('#')[1].strip() if ('#' in line) else ''
+      if smt_type not in vdwpair_params.keys():
+        vdwpair_params[smt_type] = (prm_str, comment)
+      else:
+        print("Warning: there are two sets of vdwpair parameters in the database")
+        print(f"One is {prm_str}, and the other is {vdwpair_params[smt_type][0]}")
+
   ttypes, stypes = np.loadtxt(f"{fname}.type.nonbonded", usecols=(2,3), unpack=True, dtype="str")
   tinkerCPDict = {}
   tinkerCTDict = {}
   tinkerVDWDict = {}
-  for t,s in zip(ttypes, stypes): 
+  tinkerVDWPAIRDict = {}
+  for t,s in zip(ttypes, stypes):
     if t not in tinkerCPDict:
       tinkerCPDict[t] = chgpen_params[s]
       tinkerCTDict[t] = chgtrn_params[s]
       tinkerVDWDict[t] = vdw_params[s]
+    if (t not in tinkerVDWPAIRDict) and (s in vdwpair_params):
+      tinkerVDWPAIRDict[t] = vdwpair_params[s]
   lines = open(key).readlines()
   with open(key + "_nonbonded", "w") as f:
     for t in tinkerCPDict:
@@ -614,6 +632,14 @@ def assignNonbondedAMOEBAplus():
       line = "vdw  %5s %s\n"%(t, tinkerVDWDict[t])
       f.write(line)
     print(GREEN+"van der Waals parameters assigned from database"+ENDC)
+    for t in tinkerVDWPAIRDict:
+      prm_str, comment = tinkerVDWPAIRDict[t]
+      if comment != '':
+        f.write("# VDWPAIR: %s\n"%comment)
+      f.write("vdwpair  %5s %s\n"%(t, prm_str))
+      print(GREEN + f"VDWPAIR: {comment}" + ENDC)
+    if tinkerVDWPAIRDict != {}:
+      print(GREEN+"van der Waals pair parameters assigned from database"+ENDC)
   return True
 
 def assignNonbondedHIPPO19():
